@@ -213,11 +213,9 @@ const OrderDetails = (props) => {
                   amount: {
                     currency_code: "USD",
                     value: subtotal + delievery - coupon
-                  }
-                }],
-                // application_context: {
-                //   shipping_preference: "NO_SHIPPING" // default is "GET_FROM_FILE"
-                // }
+                  },
+                  products: cartProduct
+                }]
               });
             }}
             onApprove={(data, actions) => {
