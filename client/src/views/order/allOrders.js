@@ -199,9 +199,9 @@ const AllOrders = (props) => {
                             ></input>
                           </TableCell>
                           <TableCell>
-                            {order.customer_id.first_name +
+                            {order.customer_id ? (order.customer_id.first_name +
                               " " +
-                              order.customer_id.last_name}
+                              order.customer_id.last_name): null}
                           </TableCell>
                           <TableCell>
                             {convertDateToStringFormat(order.date)}
