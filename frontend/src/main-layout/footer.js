@@ -7,17 +7,23 @@ import {
   List,
   ListItem,
   ListItemText,
+  TextField,
+  Button
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import { Formik } from "formik";
+import { newsletterAction } from "../store/action/newsletterAction";
+import { connect } from "react-redux";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <Fragment>
       <footer>
         <Box component="div" className="footer-upper">
           <Container>
             <Grid container spacing={5}>
-              <Grid item md={4} sm={12} xs={12}>
+              <Grid item md={3} sm={6} xs={6}>
                 <Box textAlign="left">
                   <Typography variant="h4" className="color-footer">
                     Gandom Mart
@@ -29,7 +35,7 @@ const Footer = () => {
                   </Typography> */}
                 </Box>
               </Grid>
-              <Grid item md={4} sm={6} xs={6}>
+              <Grid item md={3} sm={6} xs={6}>
                 <Typography
                   variant="h5"
                   className="footer-widget-header"
@@ -65,7 +71,7 @@ const Footer = () => {
                   </ListItem>
                 </List>
               </Grid>
-              <Grid item md={4} sm={6} xs={6}>
+              <Grid item md={3} sm={6} xs={6}>
                 <Typography
                   variant="h5"
                   className="footer-widget-header"
@@ -103,6 +109,64 @@ const Footer = () => {
                   </ListItem>
                 </List>
               </Grid>
+              <Grid item md={3} sm={6} xs={6}>
+                <Typography
+                  variant="h5"
+                  className="footer-widget-header"
+                  className="color-footer"
+                >
+                  News Letter
+                </Typography>
+                <hr />
+                <Formik
+                  initialValues={{
+                    email: ""
+                  }}
+                  validationSchema={Yup.object().shape({
+                    email: Yup.string()
+                      .email("Must be a valid email")
+                      .max(255)
+                      .required("Email is required"),
+                  })}
+                  onSubmit={(values) => {
+                    props.newsletterAction(values.email)
+                    values.email = ""
+                  }}
+                >
+                  {({
+                    errors,
+                    handleBlur,
+                    handleChange,
+                    handleSubmit,
+                    isSubmitting,
+                    touched,
+                    values,
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                      <TextField
+                        error={Boolean(touched.email && errors.email)}
+                        label="Email Address"
+                        name="email"
+                        variant="outlined"
+                        size="small"
+                        value={values.email}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        style={{"width": "100%"}}
+                      />
+                      <Button
+                        style={{"borderRadius": "4px", "float":"right", "marginTop": "4px"}}
+                        variant="contained"
+                        color="primary"
+                        className="margin-left-1"
+                        type="submit"
+                      >
+                        Submit
+                      </Button>
+                    </form>
+                  )}
+                </Formik>
+              </Grid>
             </Grid>
           </Container>
         </Box>
@@ -136,4 +200,12 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  newsletterAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);

@@ -32,6 +32,7 @@ const OrderProductItem = (props) => {
     var del = window.confirm("Are you sure?");
     if (del == true) {
       props.deleteOrder(item.id);
+      window.toast("Order is deleted succefully.");
       window.location.href = "/account/orders";
     }
   }
@@ -40,6 +41,7 @@ const OrderProductItem = (props) => {
     var upd = window.confirm("Are you sure?");
     if (upd == true) {
       props.updateOrder(item);
+      window.toast("Order is updated succefully.", "warning");
       window.location.href = "/account/orders";
     }
   }

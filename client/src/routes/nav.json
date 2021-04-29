@@ -86,6 +86,11 @@
       "url": "/shipping",
       "icon": "local_shipping"
     },
+     {
+      "name": "Newsletter",
+      "url": "/newsletter",
+      "icon": "newsletter"
+    },
     {
       "name": "Reviews",
       "url": "/reviews",

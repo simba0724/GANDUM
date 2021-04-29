@@ -114,6 +114,13 @@ const ProductDetail = (props) => {
               </Typography>
             )}
 
+            {/* ==========Product Short Desciprtion ===========*/}
+            {product.quantity ? (
+              <Typography variant="body1" className="product-description">
+                Stock remaining: {product.quantity}
+              </Typography>
+            ) : null}
+
             {/* ==========Product Attributes ===========*/}
             {product.attributed && (
               <Box

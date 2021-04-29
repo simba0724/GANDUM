@@ -15,12 +15,17 @@ import CartSide from "./cart";
 import { Link } from "react-router-dom";
 import { homepageAction } from "../store/action/homepageAction";
 import { isEmpty } from "../utils/helper";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = (props) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [themeSetting, setThemeSetting] = useState({});
-
+  window.toast = function(msg, type="success"){
+    console.log(type)
+    toast[type](msg);
+  };
   useEffect(() => {
     if (isEmpty(props.home.homepage)) {
       props.homepageAction();
@@ -46,6 +51,7 @@ const Header = (props) => {
       <header
         style={{ backgroundColor: "rgb(245, 222, 179)", height: 60, paddingTop: 15, "fontFamily": "font-family: Josefin Sans, sans-serif !important" }}
       >
+        <ToastContainer/>
         <Container>
           <Box component="div" className="header-wrapper">
             <Grid container justify="space-between" alignItems="center">
