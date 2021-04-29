@@ -196,7 +196,7 @@ const OrderDetails = (props) => {
             amount={subtotal + delievery - coupon}
             // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
             onSuccess={(details, data) => {
-              alert("Transaction completed");
+              window.toast("Transaction completed");
               props.setPaypalbtn(false);
               props.Billing();
               // OPTIONAL: Call your server to save the transaction

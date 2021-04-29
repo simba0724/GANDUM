@@ -126,6 +126,10 @@ import {
   attributeDeleteAction,
 } from "./productAttributeAction";
 
+import {
+  newsletterAction
+} from "./newsletterAction";
+
 export {
   LoginAction,
   usersAction,
@@ -215,5 +219,7 @@ export {
   attributeAddAction,
   attributeUpdateAction,
   attributeDeleteAction,
-  productsDeleteManyAction
+  productsDeleteManyAction,
+  newsletterAction
 };
+

@@ -22,6 +22,7 @@ import AllTaxes from "../views/tax";
 import AllShippings from "../views/shipping";
 import NotFound from "../views/notFound";
 import { AllReviews, EditReview } from "../views/reviews";
+import AllNewsletter from "../views/newsletter";
 import { AddFAQ, AllFAQ, EditFAQ } from "../views/faq";
 
 const Routes = [
@@ -200,6 +201,12 @@ const Routes = [
     exact: true,
     component: EditReview,
     name: "Edit Review",
+  },
+  {
+    path: "/newsletter",
+    exact: true,
+    component: AllNewsletter,
+    name: "All newsletter",
   },
   {
     path: "*",
