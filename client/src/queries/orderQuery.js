@@ -13,6 +13,7 @@ const GET_ORDERS = gql`
       total
       subtotal
       paymentMethod
+      customer_id
     }
   }
 `;

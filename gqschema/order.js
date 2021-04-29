@@ -12,6 +12,7 @@ module.exports = gql`
     paymentMethod: String
     subtotal: Float
     total: Float
+    customer_id: customObject
   }
 
   input orderProduct {

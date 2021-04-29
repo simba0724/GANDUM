@@ -12,6 +12,7 @@ import {
   FormHelperText,
   NativeSelect,
 } from "@material-ui/core";
+import Auth from "../../utils/auth";
 
 var billingInfoObject = {
   order_notes: "",
@@ -51,6 +52,15 @@ const BillingForm = (props) => {
   const [shippingAdd, setShippingAdd] = useState(false);
 
   useEffect(() => {
+    // billingInfoObject
+    var user = Auth.getUser();
+    console.log(user)
+    if(user){
+      billingInfoObject.firstname = user.name;
+      billingInfoObject.lastname = user.last_name;
+      billingInfoObject.email = user.email;
+      billingInfoObject.phone = user.phone;
+    }
     var allData = {
       billing: billingInfo,
       shipping: shippingInfo,

@@ -80,43 +80,43 @@ module.exports = function validate(method, args) {
       //   return (errors = "Billing's Transaction field is required");
       // }
 
-      if (
-        !args.shipping.firstname &&
-        Validator.isEmpty(args.shipping.firstname)
-      ) {
-        return (errors = "Shipping's First Name field is required");
-      }
+      // if (
+      //   !args.shipping.firstname &&
+      //   Validator.isEmpty(args.shipping.firstname)
+      // ) {
+      //   return (errors = "Shipping's First Name field is required");
+      // }
 
-      if (
-        !args.shipping.lastname &&
-        Validator.isEmpty(args.shipping.lastname)
-      ) {
-        return (errors = "Shipping's Last Name field is required");
-      }
+      // if (
+      //   !args.shipping.lastname &&
+      //   Validator.isEmpty(args.shipping.lastname)
+      // ) {
+      //   return (errors = "Shipping's Last Name field is required");
+      // }
 
-      if (!args.shipping.company && Validator.isEmpty(args.shipping.company)) {
-        return (errors = "Shipping's Company field is required");
-      }
+      // if (!args.shipping.company && Validator.isEmpty(args.shipping.company)) {
+      //   return (errors = "Shipping's Company field is required");
+      // }
 
       // if (!args.shipping.address && Validator.isEmpty(args.shipping.address)) {
       //   return (errors = "Shipping's Address field is required");
       // }
 
-      if (!args.shipping.city && Validator.isEmpty(args.shipping.city)) {
-        return (errors = "Shipping's City field is required");
-      }
+      // if (!args.shipping.city && Validator.isEmpty(args.shipping.city)) {
+      //   return (errors = "Shipping's City field is required");
+      // }
 
       // if (!args.shipping.zip && Validator.isEmpty(args.shipping.zip)) {
       //   return (errors = "Shipping's Zip field is required");
       // }
 
-      if (!args.shipping.country && Validator.isEmpty(args.shipping.country)) {
-        return (errors = "Shipping's Country field is required");
-      }
+      // if (!args.shipping.country && Validator.isEmpty(args.shipping.country)) {
+      //   return (errors = "Shipping's Country field is required");
+      // }
 
-      if (!args.shipping.state && Validator.isEmpty(args.shipping.state)) {
-        return (errors = "Shipping's State field is required");
-      }
+      // if (!args.shipping.state && Validator.isEmpty(args.shipping.state)) {
+      //   return (errors = "Shipping's State field is required");
+      // }
       break;
     }
   }

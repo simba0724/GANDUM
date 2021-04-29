@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const OrderSchema = new Schema({
   customer_id: {
     type: Schema.ObjectId,
+    ref: "Customer",
     required: true,
   },
   billing: {

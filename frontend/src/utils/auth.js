@@ -2,6 +2,15 @@ import cookie from "react-cookies";
 
 var user_token = cookie.load("auth");
 var username = cookie.load("username");
+
+const isAuth = () => {
+  if(user_token){
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const getToken = () => {
   return user_token.token;
 };
@@ -33,4 +42,5 @@ export default {
   setUserToken,
   getUserName,
   logout,
+  isAuth
 };

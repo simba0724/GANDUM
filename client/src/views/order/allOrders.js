@@ -199,9 +199,9 @@ const AllOrders = (props) => {
                             ></input>
                           </TableCell>
                           <TableCell>
-                            {order.shipping.firstname +
+                            {order.customer_id.first_name +
                               " " +
-                              order.shipping.lastname}
+                              order.customer_id.last_name}
                           </TableCell>
                           <TableCell>
                             {convertDateToStringFormat(order.date)}

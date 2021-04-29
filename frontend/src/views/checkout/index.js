@@ -59,6 +59,12 @@ const Checkout = (props) => {
         props.history.push("/thankyou");
       }
     } else {
+      token = Auth.isAuth();
+      if (!token) {
+        window.toast("You should Login", "warning");
+        props.history.push("/login");
+        return;
+      }
       setPaypalbtn(true);
     }
   };
