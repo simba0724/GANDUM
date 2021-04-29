@@ -33,6 +33,7 @@ const MasterReducer = combineReducers({
   reviews,
   pages,
   settings,
+  product_attributes,
   newsletter,
 });
 

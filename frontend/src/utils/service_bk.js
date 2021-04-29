@@ -124,18 +124,18 @@ export const login = (email, password) => {
 export const register = (
   first_name,
   last_name,
-  company,
   phone,
   email,
-  password
+  password,
+  address
 ) => {
   const body = {
     first_name,
     last_name,
-    company,
     phone,
     email,
     password,
+    address
   };
 
   axios

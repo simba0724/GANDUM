@@ -31,7 +31,6 @@ router.post("/register", (req, res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        company: req.body.company,
         phone: req.body.phone,
         password: req.body.password,
         wishlist: []

@@ -62,8 +62,8 @@ const Address = (props) => {
     console.log(props);
     if (props.customer) {
       console.log("custInfoprops", props.customer[0]);
-      setcustInfo(props.customer[0]);
-      setAddrId(props.customer[0]._id);
+      // setcustInfo(props.customer[0]);
+      // setAddrId(props.customer[0]._id);
     }
     // console.log("custInfostate", custInfo);
   }, []);

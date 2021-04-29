@@ -8,15 +8,12 @@ export default function OrderSearchBar({ data, fields, onQuery }) {
   console.log("search bar data", data);
   useEffect(() => {
     let queried = data.filter((datum) => {
-      for (let field of fields) {
-        if (!filter[field]) continue;
-
-        if (
-          datum[field]?.toLowerCase().search(filter[field].toLowerCase()) == -1
-        ) {
+      // for (let field of fields) {
+      //   if (!filter[field]) continue;
+        if (datum.shipping.firstname.toLowerCase().search(filter["name"].toLowerCase()) == -1) {
           return false;
         }
-      }
+      // }
       return true;
     });
     if (dFrom)

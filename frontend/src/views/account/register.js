@@ -20,9 +20,9 @@ const Register = (props) => {
     register(
       values.first_name,
       values.last_name,
-      values.company,
       values.phone,
       values.email,
+      values.address,
       values.password
     );
   };
@@ -50,7 +50,7 @@ const Register = (props) => {
             password: "",
             confirmPassword: "",
             phone: "",
-            company: "",
+            address: ""
           }}
           validationSchema={Yup.object().shape({
             email: Yup.string()
@@ -67,7 +67,6 @@ const Register = (props) => {
               .matches(
                 /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
               ),
-            company: Yup.string().max(255),
             password: Yup.string()
               .max(255)
               .required("password is required")
@@ -143,18 +142,6 @@ const Register = (props) => {
                 variant="outlined"
               />
               <TextField
-                error={Boolean(touched.company && errors.company)}
-                fullWidth
-                helperText={touched.company && errors.company}
-                label="Comapany"
-                margin="normal"
-                name="company"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.company}
-                variant="outlined"
-              />
-              <TextField
                 error={Boolean(touched.email && errors.email)}
                 fullWidth
                 helperText={touched.email && errors.email}
@@ -165,6 +152,19 @@ const Register = (props) => {
                 onChange={handleChange}
                 type="email"
                 value={values.email}
+                variant="outlined"
+              />
+              <TextField
+                error={Boolean(touched.address && errors.address)}
+                fullWidth
+                helperText={touched.address && errors.address}
+                label="Address"
+                margin="normal"
+                name="address"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="text"
+                value={values.address}
                 variant="outlined"
               />
               <TextField

@@ -4,7 +4,7 @@ const db = APP_KEYS.mongoURI;
 // "mongodb://localhost:27017/gandum"
 const connecDB = async () => {
   try {
-    await mongoose.connect(db, {
+    await mongoose.connect("mongodb://localhost:27017/gandum", {
       useNewUrlParser: true,
       useCreateIndex: true,
       useFindAndModify: false,
