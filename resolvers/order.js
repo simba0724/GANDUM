@@ -12,7 +12,7 @@ module.exports = {
   Query: {
     orders: async (root, args) => {
       try {
-        return await Order.find({});
+        return await Order.find({}).populate("user_id", "name");
       } catch (error) {
         throw new Error("Something went wrong.");
       }
@@ -51,7 +51,7 @@ module.exports = {
       // checkToken(id);
       try {
         const newOrder = new Order({
-          customer_id: args.user_id,
+          customer_id: id,
           billing: args.billing,
           shipping: args.shipping,
           status: "Processing",

@@ -28,7 +28,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import viewStyles from "../viewStyles";
 import { convertDateToStringFormat } from "../utils/convertDate";
 import { CSVLink } from "react-csv";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/OrderSearchBar";
 
 const AllOrders = (props) => {
   const classes = viewStyles();
@@ -140,7 +140,7 @@ const AllOrders = (props) => {
               <SearchBar
                 data={props.orders.orders}
                 // field={"name"}
-                fields={["name", "category", "brand name"]}
+                fields={["name"]}
                 onQuery={(data) => setDataToShow(data)}
               ></SearchBar>
             </div>

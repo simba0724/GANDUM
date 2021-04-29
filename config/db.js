@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const APP_KEYS = require("./keys");
 const db = APP_KEYS.mongoURI;
-
+// "mongodb://localhost:27017/gandum"
 const connecDB = async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/gandum", {
