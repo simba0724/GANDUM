@@ -93,6 +93,9 @@ router.post("/login", (req, res) => {
               company: customer.company,
               user_id: customer._id,
               name: customer.first_name,
+              last_name: customer.last_name,
+              email: customer.email,
+              phone: customer.phone,
               wishlist: customer.wishlist
             });
           }

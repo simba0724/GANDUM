@@ -94,7 +94,6 @@ export const deleteOrder = (id) => (dispatch) => {
         "order delete succesfull",
         response.data
       );
-      window.alert("Order Deleted Succesfully");
       // dispatch({
       //   type: ALERT_SUCCESS,
       //   payload: { boolean: true, message: "Order Deleted Succesfully", error: true }
@@ -124,7 +123,6 @@ export const updateOrder = (order) => (dispatch) => {
         "order change succesfull",
         response.data
       );
-      window.alert("Order Refunded Succesfully");
       // dispatch({
       //   type: ALERT_SUCCESS,
       //   payload: {

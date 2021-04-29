@@ -10,10 +10,18 @@ export default function OrderSearchBar({ data, fields, onQuery }) {
     let queried = data.filter((datum) => {
       // for (let field of fields) {
       //   if (!filter[field]) continue;
-        if (datum.shipping.firstname.toLowerCase().search(filter["name"].toLowerCase()) == -1) {
+      //.toLowerCase()
+        // if (datum.shipping.firstname.search(filter["name"]) == -1) {
+        //   return false;
+        // }
+      // }
+      let name = datum.customer_id.first_name + " " + datum.customer_id.last_name;
+      console.log(datum)
+      if(filter["name"]){
+       if (name.indexOf(filter["name"]) == -1) {
           return false;
         }
-      // }
+      }
       return true;
     });
     if (dFrom)
