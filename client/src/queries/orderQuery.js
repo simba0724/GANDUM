@@ -29,6 +29,7 @@ const GET_ORDER = gql`
       products
       date
       updated
+      customer_id
     }
   }
 `;
@@ -43,6 +44,7 @@ const DELETE_ORDER = gql`
       billing
       products
       date
+      customer_id
     }
   }
 `;
@@ -70,6 +72,7 @@ const UPDATE_ORDER = gql`
       products
       date
       updated
+      customer_id
     }
   }
 `;

@@ -15,8 +15,10 @@ export default function OrderSearchBar({ data, fields, onQuery }) {
         //   return false;
         // }
       // }
-      let name = datum.customer_id.first_name + " " + datum.customer_id.last_name;
-      console.log(datum)
+      let name = "";
+      if(datum.customer_id){
+        name = datum.customer_id.first_name + " " + datum.customer_id.last_name;
+      }
       if(filter["name"]){
        if (name.indexOf(filter["name"]) == -1) {
           return false;
