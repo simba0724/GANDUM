@@ -29,6 +29,7 @@ const initialState = {
   onSaleProducts: [],
   recentProducts: [],
   featuredProducts: [],
+  topsearch: "",
 };
 
 export default (state = initialState, action) => {
@@ -132,6 +133,13 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         success: false,
+      };
+    case "SET_TOP_SEARCH":
+      return {
+        ...state,
+        topsearch: action.payload,
+        loading: false,
+        success: true,
       };
     default:
       return state;

@@ -73,6 +73,10 @@ const Shop = (props) => {
     fillterShopProducts();
   }, [sort, priceRange, category, brand]);
 
+  React.useEffect(() => {
+    searchShopProducts();
+  }, [props.products.topsearch]);
+
   const fillterShopProducts = () => {
     let tempProducts = props.products.products.filter(p => {
       let priceflag = (p.pricing.sellprice > priceRange[0] && p.pricing.sellprice < priceRange[1]);
@@ -101,6 +105,16 @@ const Shop = (props) => {
     }
     setFilteredProducts(tempProducts);
   };
+
+  const searchShopProducts = () => {
+    let tempProducts = props.products.products.filter(p => {
+      if(p.name.indexOf(props.products.topsearch) > -1){
+        return true;
+      }
+      return false;//dsadasdsa
+    })
+    setFilteredProducts(tempProducts);
+  }
 
   const handlePriceChange = (event, newValue) => {
     setPriceRange(newValue);

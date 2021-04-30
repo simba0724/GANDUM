@@ -63,6 +63,11 @@ const Navigation = (props) => {
     console.log("menu reloaded");
   });
 
+  useEffect(() => {
+    props.history.push("/shop");
+    dispatch({ type: "SET_TOP_SEARCH", payload: searchbarText });
+  }, [searchbarText])
+
   return (
     <Fragment>
       <Box
@@ -71,7 +76,7 @@ const Navigation = (props) => {
         alignItems="center"
         className="menu-item-wrapper"
       >
-        <SearchBar />
+        <SearchBar value={searchbarText} onChange={(event)=>{setSearchbarText(event)}}/>
         <Box component="div" display="inline" m={2} className="menu-item">
           <Link onClick={() => props.drawerCloseFunc()} to="/">
             Home
