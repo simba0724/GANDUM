@@ -90,7 +90,7 @@ module.exports = {
         order.products = args.products;
         await order.save();
 
-        return await Order.find({});
+        return await Order.find({}).populate("customer_id", "first_name last_name");
       } catch (error) {
         error = checkError(error);
         throw new Error(error.custom_message);
