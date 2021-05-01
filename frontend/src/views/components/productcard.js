@@ -169,15 +169,16 @@ const ProductCard = (props) => {
           ) : null}
         </p>
         <Box component="div" display="flex" style={{justifyContent: "flex-end"}} m={2} className="menu-item">
-          {wishlist.filter(w => w === props.productDetail.id).length > 0 ?
-            (<IconButton style={{"padding": "0px 12px", "color": "#673ab7"}} onClick={addwishlist}>
-              <FavoriteIcon />
-            </IconButton>)
-            :
-            (<IconButton style={{"padding": "0px 12px", "color": "#673ab7"}} onClick={addwishlist}>
-              <FavoriteBorderIcon />
-            </IconButton>)
-          }
+          {Auth.isAuth()?(
+            wishlist.filter(w => w === props.productDetail.id).length > 0 ?
+              (<IconButton style={{"padding": "0px 12px", "color": "#673ab7"}} onClick={addwishlist}>
+                <FavoriteIcon />
+              </IconButton>)
+              :
+              (<IconButton style={{"padding": "0px 12px", "color": "#673ab7"}} onClick={addwishlist}>
+                <FavoriteBorderIcon />
+              </IconButton>)
+          ):null}
           <Badge
             badgeContent={cartQty}
             color="secondary"

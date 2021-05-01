@@ -22,6 +22,10 @@ import { isEmpty } from "../../utils/helper";
 import Loading from "../components/loading";
 import { PayPalButton } from "react-paypal-button-v2";
 
+const APP_KEYS = require("../../config/keys");
+const payPal_ID = APP_KEYS.payPal_ID;
+
+
 const OrderDetails = (props) => {
   const [subtotal, setSubTotal] = useState(0);
   const [delievery, setDelievery] = useState(0);
@@ -232,7 +236,7 @@ const OrderDetails = (props) => {
               });
             }}
             options={{
-              clientId: "Aa7tJgWKi-6yDNEfocy5zyI2Tn2wxvVOcnWBqSesgiL9QKEwDWTX4TXU96_P2z61a9jA-10hTGfa6t4W"
+              clientId: payPal_ID
             }}
           />
         )}

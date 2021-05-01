@@ -13,10 +13,19 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { register } from "../../utils/service_bk";
+import "./register.css"
+
+const styles = {
+  root: {
+    background: "black"
+  },
+  input: {
+    color: "white"
+  }
+};
 
 const Register = (props) => {
   const handleRegister = (values) => {
-    console.log(values);
     register(
       values.first_name,
       values.last_name,
@@ -26,6 +35,8 @@ const Register = (props) => {
       values.password
     );
   };
+
+  const classes = {inputStyle:{color:"green"}};
 
   return (
     <Fragment>
@@ -113,9 +124,7 @@ const Register = (props) => {
                 onChange={handleChange}
                 value={values.first_name}
                 variant="outlined"
-                style={{ borderColor: "green", borderWidth: 2 }}
               />
-              {/* </div> */}
               <TextField
                 error={Boolean(touched.last_name && errors.last_name)}
                 fullWidth

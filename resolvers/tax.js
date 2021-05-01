@@ -79,6 +79,12 @@ module.exports = {
         }
         const tax = await Tax.findOne({});
 
+        if(tax == null){
+          tax = new Tax({
+            tax_class: []
+          })
+        }
+
         tax.tax_class.push(args.tax_class);
         tax.updated = Date.now();
         await tax.save();

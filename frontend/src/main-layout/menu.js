@@ -64,7 +64,9 @@ const Navigation = (props) => {
   });
 
   useEffect(() => {
-    props.history.push("/shop");
+    if(searchbarText !== ""){
+      props.history.push("/shop");
+    }
     dispatch({ type: "SET_TOP_SEARCH", payload: searchbarText });
   }, [searchbarText])
 

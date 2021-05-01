@@ -64,7 +64,12 @@ module.exports = {
         if (!isEmpty(errors)) {
           throw putError(errors);
         }
-        const shipping = await Shipping.findOne({});
+        let shipping = await Shipping.findOne({});
+        if(shipping == null){
+          shipping = new Shipping({
+            shipping_class: []
+          })
+        }
         shipping.shipping_class.push(args.shipping_class);
         shipping.updated = Date.now();
         await shipping.save();
