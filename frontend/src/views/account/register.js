@@ -11,12 +11,35 @@ import {
   Button,
   TextField,
 } from "@material-ui/core";
+import { withStyles,
+  makeStyles,} from "@material-ui/core/styles"
 import { Link } from "react-router-dom";
 import { register } from "../../utils/service_bk";
+import "./register.css"
+
+const ValidationTextField = withStyles({
+  root: {
+    '& input + fieldset': {
+      borderColor: 'black',
+      borderWidth: 1,
+    },
+    '& input:valid + fieldset': {
+      borderColor: 'green',
+      borderWidth: 1,
+    },
+    '& input:invalid + fieldset': {
+      borderColor: 'red',
+      borderWidth: 1
+    },
+    '& input:valid:focus + fieldset': {
+      borderLeftWidth: 1,
+      padding: '4px !important', // override inline-style
+    },
+  },
+})(TextField);
 
 const Register = (props) => {
   const handleRegister = (values) => {
-    console.log(values);
     register(
       values.first_name,
       values.last_name,
@@ -26,6 +49,7 @@ const Register = (props) => {
       values.password
     );
   };
+
 
   return (
     <Fragment>
@@ -102,7 +126,7 @@ const Register = (props) => {
                 </Typography>
               </Box>
               {/* <div styles={{ backgroundColor: "black" }}> */}
-              <TextField
+              <ValidationTextField
                 error={Boolean(touched.first_name && errors.first_name)}
                 fullWidth
                 helperText={touched.first_name && errors.first_name}
@@ -113,10 +137,9 @@ const Register = (props) => {
                 onChange={handleChange}
                 value={values.first_name}
                 variant="outlined"
-                style={{ borderColor: "green", borderWidth: 2 }}
+                color="pri"
               />
-              {/* </div> */}
-              <TextField
+              <ValidationTextField
                 error={Boolean(touched.last_name && errors.last_name)}
                 fullWidth
                 helperText={touched.last_name && errors.last_name}
@@ -128,7 +151,7 @@ const Register = (props) => {
                 value={values.last_name}
                 variant="outlined"
               />
-              <TextField
+              <ValidationTextField
                 error={Boolean(touched.phone && errors.phone)}
                 fullWidth
                 helperText={touched.phone && errors.phone}
@@ -141,7 +164,7 @@ const Register = (props) => {
                 value={values.phone}
                 variant="outlined"
               />
-              <TextField
+              <ValidationTextField
                 error={Boolean(touched.email && errors.email)}
                 fullWidth
                 helperText={touched.email && errors.email}
@@ -154,7 +177,7 @@ const Register = (props) => {
                 value={values.email}
                 variant="outlined"
               />
-              <TextField
+              <ValidationTextField
                 error={Boolean(touched.address && errors.address)}
                 fullWidth
                 helperText={touched.address && errors.address}
@@ -167,7 +190,7 @@ const Register = (props) => {
                 value={values.address}
                 variant="outlined"
               />
-              <TextField
+              <ValidationTextField
                 error={Boolean(touched.password && errors.password)}
                 fullWidth
                 helperText={touched.password && errors.password}
@@ -180,7 +203,7 @@ const Register = (props) => {
                 value={values.password}
                 variant="outlined"
               />
-              <TextField
+              <ValidationTextField
                 error={Boolean(
                   touched.confirmPassword && errors.confirmPassword
                 )}

@@ -58,11 +58,14 @@
     "mongoose": "^5.11.12",
     "node-pre-gyp": "^0.14.0",
     "nodemon": "^2.0.7",
+    "react-toastify": "^7.0.4",
     "sanitize-html": "^1.27.5",
     "sharp": "^0.25.4",
     "slugify": "^1.4.6",
+    "socket.io": "^4.0.1",
     "validator": "^12.2.0",
-    "vhost": "^3.0.2"
+    "vhost": "^3.0.2",
+    "websocket": "^1.0.34"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.12"

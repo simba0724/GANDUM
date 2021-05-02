@@ -15,7 +15,7 @@ const getToken = () => {
   return user_token.token;
 };
 const getUserId = () => {
-  return user_token.user_id;
+  if(user_token)return user_token.user_id;
 };
 
 const getUser = () => {

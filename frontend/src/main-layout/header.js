@@ -23,7 +23,6 @@ const Header = (props) => {
   const [openCart, setOpenCart] = useState(false);
   const [themeSetting, setThemeSetting] = useState({});
   window.toast = function(msg, type="success"){
-    console.log(type)
     toast[type](msg);
   };
   useEffect(() => {

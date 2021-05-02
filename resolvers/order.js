@@ -49,7 +49,7 @@ module.exports = {
   },
   Mutation: {
     addOrder: async (root, args, { id }) => {
-      console.log("inside addOrder", args);
+      // console.log("inside addOrder", args);
       // checkToken(id);
       try {
         const newOrder = new Order({
@@ -63,6 +63,12 @@ module.exports = {
         });
 
         newOrder.products = [...args.products];
+
+        wss.broadcast(JSON.stringify({
+          user: "",
+          message: "One Order was added.",
+          type: ""
+        }))
 
         await newOrder.save();
         return await Order.find({});
@@ -90,6 +96,12 @@ module.exports = {
         order.products = args.products;
         await order.save();
 
+        wss.broadcast(JSON.stringify({
+          user: order.customer_id,
+          message: "Your order has been " + order.status,
+          type: ""
+        }))
+
         return await Order.find({}).populate("customer_id", "first_name last_name");
       } catch (error) {
         error = checkError(error);
@@ -99,8 +111,21 @@ module.exports = {
     deleteOrder: async (root, args, { id }) => {
       console.log(id);
       try {
-        await Order.findByIdAndRemove(args.id);
-        return await Order.find({});
+        const order = await Order.findById(args.id);
+        if (!order) {
+          throw putError("not found");
+        }
+        order.status = "Cancelled";
+        await order.save();
+
+        wss.broadcast(JSON.stringify({
+          user: order.customer_id,
+          message: "Your order has been " + order.status,
+          type: "frontend",
+          audient: "user"
+        }))
+
+        return await Order.find({}).populate("customer_id", "first_name last_name");
       } catch (error) {
         error = checkError(error);
         throw new Error(error.custom_message);

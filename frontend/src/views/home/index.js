@@ -39,12 +39,12 @@ const Home = (props) => {
       home: {
         slider: [],
         add_section_in_home: {
-          feature_product: false,
+          feature_product: true,
           most_viewed_products: false,
           product_from_specific_categories: false,
           product_recommendation: false,
-          products_on_sales: false,
-          recently_added_products: false,
+          products_on_sales: true,
+          recently_added_products: true,
           recently_bought_products: false,
         },
       },
@@ -146,7 +146,7 @@ const Home = (props) => {
       }
     }
   }, [props.productsByCatId]);
-
+console.log(homepageSetting)
   return (
     <Fragment>
       <Helmet>

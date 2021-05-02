@@ -9,6 +9,9 @@ import Login from "./views/login";
 import "./assets/scss/index.css";
 import "./App.css";
 
+const webSocket = new WebSocket("ws://127.0.0.1:8000");
+window.wss = webSocket;
+
 const App = () => {
   const dispatch = useDispatch();
   const login = useSelector(state => state.login)

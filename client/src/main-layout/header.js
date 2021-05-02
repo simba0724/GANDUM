@@ -19,6 +19,8 @@ import palette from "../theme/palette";
 import { Link } from "react-router-dom";
 import { insertToken } from "../store/action/loginAction";
 import { connect } from "react-redux";
+import Alert from "../views/utils/Alert";
+import { useDispatch } from "react-redux";
 
 const Header = (props) => {
   const { onSidebarOpen } = props;
@@ -29,6 +31,7 @@ const Header = (props) => {
     image: { thumbnail: "" },
   });
   const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -47,9 +50,23 @@ const Header = (props) => {
     setActiveUser(props.login.user_token);
   }, [props.login.user_token]);
 
+  useEffect(() => {
+    window.wss.onmessage = (message) => {
+      let data = JSON.parse(message.data)
+      console.log(data);
+      if(data.type == "backend" || data.type == ""){
+        dispatch({
+          type: "ALERT_SUCCESS",
+          payload: { boolean: true, message: data.message, error: false },
+        });
+      }
+    };
+  }, []);
+
   return (
     <AppBar className={classes.header}>
       <Toolbar className={classes.header}>
+        <Alert />
         <RouterLink to="/admin/dashboard">
           <Typography variant="h4" component="h4" className={classes.textWhite}>
             Gandom Mart

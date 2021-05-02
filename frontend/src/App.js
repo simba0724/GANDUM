@@ -23,6 +23,10 @@ var theme = createMuiTheme({
   }
 });
 
+const webSocket = new WebSocket("ws://127.0.0.1:8000");
+console.log(webSocket)
+window.wss = webSocket;
+
 const App = props => {
   useEffect(() => {
     palette.primary.main = props.settings.themes[0].primaryColor;

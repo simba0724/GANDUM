@@ -24,6 +24,8 @@ import { withRouter } from "react-router";
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+// import { w3cwebsocket as W3CWebSocket } from "websocket";
+
 const Navigation = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [collaspeAccount, setCollaspeAccount] = useState(false);
@@ -47,6 +49,19 @@ const Navigation = (props) => {
     handleClose();
     props.drawerCloseFunc();
   };
+
+  useEffect(() => {
+    window.wss.onmessage = (message) => {
+      let data = JSON.parse(message.data)
+      let user_id = Auth.getUserId()
+      if(data.type == "frontend" || data.type == ""){
+        if(user_id == data.user){
+          window.toast(data.message)
+        }
+      }
+    };
+  }, []);
+
   useEffect(() => {
     try {
       const token = Auth.getToken();
@@ -64,7 +79,9 @@ const Navigation = (props) => {
   });
 
   useEffect(() => {
-    props.history.push("/shop");
+    if(searchbarText !== ""){
+      props.history.push("/shop");
+    }
     dispatch({ type: "SET_TOP_SEARCH", payload: searchbarText });
   }, [searchbarText])
 

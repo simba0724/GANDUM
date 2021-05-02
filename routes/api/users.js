@@ -66,11 +66,51 @@ router.post("/register", (req, res) => {
 // @route   GET api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   console.log("inside /login");
   const email = req.body.email;
   const password = req.body.password;
   const errors = {};
+
+  let first_user_flag = await User.find();
+
+  if(first_user_flag.length == 0) {
+    let first_user = new User({
+      name: "Admin",
+      email: "admin@gmail.com",
+      password: "admin123",
+      role: "Manager",
+    })
+
+    await bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash("admin123", salt, async (err, hash) => {
+          if (err) throw err;
+          first_user.password = hash;
+          await first_user.save()
+
+          let first_payload = { id: first_user.id, name: first_user.name, email: first_user.email }; // Create JWT Payload
+          // Sign Token
+          jwt.sign(
+            first_payload,
+            APP_KEYS.jwtSecret,
+            { expiresIn: 36000 },
+            (err, token) => {
+              console.log("first_user");
+
+              return res.json({
+                success: true,
+                token: token,
+                role: first_payload.role,
+                user_id: first_payload.id,
+                name: first_payload.name,
+                image: first_payload.image,
+              });
+            }
+          );
+        });
+      });
+  }
+
   // Find user by email
   User.findOne({ email }).then((user) => {
     // Check for user
