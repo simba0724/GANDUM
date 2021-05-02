@@ -18,7 +18,7 @@ export const reviewsAction = () => dispatch => {
     .then(response => {
       if (response) {
         return dispatch({
-          type: REVIEWS_SUCCESS,
+          type: "REVIEWS_SUCCESS",
           payload: response.data.reviews
         });
       }

@@ -26,11 +26,18 @@ import { reviewsAction, reviewDeleteAction } from "../../store/action";
 import { Loading } from "../components";
 import { convertDateToStringFormat } from "../utils/convertDate";
 import { CSVLink } from "react-csv";
-
+//useSelector((state) => state.reviews)
 const AllReviews = () => {
   const classes = viewStyles();
   const dispatch = useDispatch();
-  const reviewState = useSelector((state) => state.reviews);
+  const reviewState = useSelector((state) => {
+    return {
+      reviews: state.reviews.reviews,
+      loading: state.reviews.loading
+    };
+  })
+  //state.reviews
+  
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -109,11 +116,11 @@ const AllReviews = () => {
                           </TableCell>
                           <TableCell> {review.product_id.name}</TableCell>
                           <TableCell>
-                            <Rating
+                            {/*<Rating
                               name="read-only"
                               value={Number(review.rating)}
                               readOnly
-                            />
+                            />*/}
                           </TableCell>
                           <TableCell>
                             <Tooltip title="Edit Review" aria-label="delete">
