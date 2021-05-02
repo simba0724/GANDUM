@@ -54,7 +54,7 @@ const Header = (props) => {
     window.wss.onmessage = (message) => {
       let data = JSON.parse(message.data)
       console.log(data);
-      if(data.type == "backend" || data.type == ""){
+      if(data.type == "backend"){
         dispatch({
           type: "ALERT_SUCCESS",
           payload: { boolean: true, message: data.message, error: false },

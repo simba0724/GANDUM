@@ -67,7 +67,7 @@ module.exports = {
         wss.broadcast(JSON.stringify({
           user: "",
           message: "One Order was added.",
-          type: ""
+          type: "backend"
         }))
 
         await newOrder.save();
@@ -99,7 +99,13 @@ module.exports = {
         wss.broadcast(JSON.stringify({
           user: order.customer_id,
           message: "Your order has been " + order.status,
-          type: ""
+          type: "frontend"
+        }))
+
+        wss.broadcast(JSON.stringify({
+          user: order.customer_id,
+          message: "One order's status is changed to " + order.status,
+          type: "backend"
         }))
 
         return await Order.find({}).populate("customer_id", "first_name last_name");

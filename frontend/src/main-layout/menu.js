@@ -54,7 +54,7 @@ const Navigation = (props) => {
     window.wss.onmessage = (message) => {
       let data = JSON.parse(message.data)
       let user_id = Auth.getUserId()
-      if(data.type == "frontend" || data.type == ""){
+      if(data.type == "frontend"){
         if(user_id == data.user){
           window.toast(data.message)
         }
