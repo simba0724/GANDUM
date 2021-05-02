@@ -12,7 +12,7 @@ import Auth from "../../utils/auth";
 export const checkoutDetailsAction = (checkoutDetailsData) => (dispatch) => {
   if (localStorage.getItem("chekoutDetails")) {
     localStorage.removeItem("chekoutDetails");
-    localStorage.removeItem("coupon");
+    localStorage.setItem("coupon", "{}");
     dispatch({
       type: "APPLY_COUPON_DELETE",
       payload: [],

@@ -32,7 +32,7 @@ const OrderProductItem = (props) => {
     var del = window.confirm("Are you sure?");
     if (del == true) {
       props.deleteOrder(item.id);
-      window.toast("Order is deleted succefully.");
+      window.toast("Order is cancelled succefully.");
       window.location.href = "/account/orders";
     }
   }

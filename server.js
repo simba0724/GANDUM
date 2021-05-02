@@ -38,6 +38,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const vhost = require("vhost");
 
+const WebSocket = require('ws');
+
 //connect db
 connectDB();
 
@@ -125,9 +127,23 @@ if (process.env.NODE_ENV === "production") {
   // httpsServer.listen(443, () => {
   //   console.log("HTTPS Server running on port 443");
   // });
-  const PORT = process.env.PORT || 8000;
-  app.listen(PORT, () => console.log(`server started on port ${PORT}`));
-} else {
-  const PORT = process.env.PORT || 8000;
-  app.listen(PORT, () => console.log(`server started on port ${PORT}`));
 }
+
+const PORT = process.env.PORT || 8000;
+// app.listen(PORT, () => console.log(`server started on port ${PORT}`));
+
+const httpServer = http.createServer(app);
+
+const wss = new WebSocket.Server({ server: httpServer });
+
+wss.broadcast = function broadcast(data) {
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data);
+    }
+  });
+};
+
+global.wss = wss;
+
+httpServer.listen(PORT, () => console.log(`server started on port ${PORT}`));

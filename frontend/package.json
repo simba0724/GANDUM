@@ -40,6 +40,7 @@
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "toastr": "^2.1.4",
+    "websocket": "^1.0.34",
     "yup": "^0.32.9"
   },
   "scripts": {

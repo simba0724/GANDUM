@@ -1,11 +1,7 @@
-/*.MuiFormLabel-filled {
+.MuiFormLabel-filled {
 	color: green !important;
 }
 
 .focus-visible {
 	color: blue !important;
 }
-
-.MuiOutlinedInput-notchedOutline {
-    border-color: green;
-}*/
