@@ -20,19 +20,10 @@ import Rating from "@material-ui/lab/Rating";
 import convertDate from "../../utils/convertDate";
 import { connect } from "react-redux";
 import { productAddReviewAction } from "../../store/action/productAction";
-
-var reviewObject = {
-  title: "",
-  email: "review@email.com",
-  review: "",
-  rating: "0",
-  status: "pending",
-  customer_id: "5e58ddd73a4cf62a50a386a9",
-  product_id: "",
-};
+import Productotherdetail_review from "./productotherdetail_review";
+import ReactStars from "react-rating-stars-component";
 
 const ProductOtherDetails = (props) => {
-  const [review, setReview] = useState(reviewObject);
   const [tabValue, setTabValue] = useState(0);
   const [writeReview, setWriteReview] = useState(false);
 
@@ -70,16 +61,6 @@ const ProductOtherDetails = (props) => {
       </div>
     );
   }
-
-  const addReview = () => {
-    props.productAddReviewAction(review);
-    setReview(reviewObject);
-    setWriteReview(!writeReview);
-  };
-
-  useEffect(() => {
-    setReview({ ...review, product_id: props.productId });
-  }, [props.productId]);
 
   return (
     <Fragment>
@@ -199,82 +180,7 @@ const ProductOtherDetails = (props) => {
                   Write a review
                 </span>
                 <Collapse in={writeReview}>
-                  <Grid item md={12} sm={12} xs={12}>
-                    <Box className="leave-review-wrapper" component="div">
-                      <Grid container spacing={2}>
-                        <Grid item md={12} sm={12} xs={12}>
-                          <Typography
-                            variant="h3"
-                            className="margin-bottom-2 text-center"
-                          >
-                            Leave Us A Review
-                          </Typography>
-                        </Grid>
-                        <Grid item md={12} sm={12} xs={12}>
-                          <TextField
-                            type="text"
-                            label="Title"
-                            variant="outlined"
-                            size="small"
-                            className="width-100"
-                            value={review.title}
-                            onChange={(e) =>
-                              setReview({ ...review, title: e.target.value })
-                            }
-                          />
-                        </Grid>
-                        <Grid item md={12} sm={12} xs={12}>
-                          <Box
-                            component="fieldset"
-                            borderColor="transparent"
-                            className="fieldset-rating"
-                          >
-                            <Typography component="legend">Rating</Typography>
-                            {/*<Rating
-                              name="rating-val"
-                              value={parseInt(review.rating)}
-                              onChange={(event, newValue) => {
-                                setReview({
-                                  ...review,
-                                  rating: newValue.toString(),
-                                });
-                              }}
-                            />*/}
-                          </Box>
-                        </Grid>
-                        <Grid item md={12} sm={6} xs={12}>
-                          <TextField
-                            type="text"
-                            label="Review"
-                            variant="outlined"
-                            size="small"
-                            className="width-100"
-                            multiline
-                            value={review.review}
-                            rows="4"
-                            onChange={(e) =>
-                              setReview({ ...review, review: e.target.value })
-                            }
-                          />
-                        </Grid>
-                        <Grid
-                          item
-                          md={12}
-                          xs={12}
-                          sm={12}
-                          className="text-center"
-                        >
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={addReview}
-                          >
-                            Add Review
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Grid>
+                  <Productotherdetail_review writeReviewToggle = {writeReviewToggle} productId={props.productId}/>
                 </Collapse>
                 <Grid container spacing={2} className="product-reviews">
                   {props.reviews &&
@@ -304,11 +210,16 @@ const ProductOtherDetails = (props) => {
                               </span>{" "}
                               - {convertDate(singleReview.date)}
                             </Typography>
-                            {/*<Rating
-                              name="read-only"
-                              value={parseInt(singleReview.rating, 10)}
+                            <ReactStars
                               readOnly
-                            />*/}
+                              count={parseInt(singleReview.rating)}
+                              size={24}
+                              emptyIcon={<i className="far fa-star"></i>}
+                              halfIcon={<i className="fa fa-star-half-alt"></i>}
+                              fullIcon={<i className="fa fa-star"></i>}
+                              activeColor="#ffd700"
+                              edit={false}
+                            />
                           </Box>
                           <Typography
                             variant="subtitle1"
@@ -409,78 +320,7 @@ const ProductOtherDetails = (props) => {
                 <Collapse in={writeReview}>
                   <Grid item md={12} sm={12} xs={12}>
                     <Box className="leave-review-wrapper">
-                      <Grid container spacing={2}>
-                        <Grid item md={12} sm={12} xs={12}>
-                          <Typography
-                            variant="h3"
-                            className="margin-bottom-2 text-center"
-                          >
-                            Leave Us A Review
-                          </Typography>
-                        </Grid>
-                        <Grid item md={12} sm={12} xs={12}>
-                          <TextField
-                            type="text"
-                            label="Title"
-                            variant="outlined"
-                            size="small"
-                            className="width-100"
-                            value={review.title}
-                            onChange={(e) =>
-                              setReview({ ...review, title: e.target.value })
-                            }
-                          />
-                        </Grid>
-                        <Grid item md={12} sm={12} xs={12}>
-                          <Box
-                            component="fieldset"
-                            borderColor="transparent"
-                            className="fieldset-rating"
-                          >
-                            <Typography component="legend">Rating</Typography>
-                            {/*<Rating
-                              name="rating-val"
-                              value={parseInt(review.rating)}
-                              onChange={(event, newValue) => {
-                                setReview({
-                                  ...review,
-                                  rating: newValue.toString(),
-                                });
-                              }}
-                            />*/}
-                          </Box>
-                        </Grid>
-                        <Grid item md={12} sm={6} xs={12}>
-                          <TextField
-                            type="text"
-                            label="Review"
-                            variant="outlined"
-                            size="small"
-                            className="width-100"
-                            multiline
-                            value={review.review}
-                            rows="4"
-                            onChange={(e) =>
-                              setReview({ ...review, review: e.target.value })
-                            }
-                          />
-                        </Grid>
-                        <Grid
-                          item
-                          md={12}
-                          xs={12}
-                          sm={12}
-                          className="text-center"
-                        >
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={addReview}
-                          >
-                            Add Review
-                          </Button>
-                        </Grid>
-                      </Grid>
+                      <Productotherdetail_review writeReviewToggle = {writeReviewToggle} productId={props.productId}/>
                     </Box>
                   </Grid>
                 </Collapse>

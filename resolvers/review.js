@@ -64,9 +64,10 @@ module.exports = {
   },
   Mutation: {
     addReview: async (root, args, { id }) => {
-      //checkToken(id);
+      // checkToken(id);
       try {
         // Check Validation
+        console.log(args)
         const errors = validate("addReview", args);
         if (!isEmpty(errors)) {
           throw putError(errors);

@@ -170,6 +170,7 @@ export const productAddReviewAction = (object) => (dispatch) => {
   dispatch({
     type: PRODUCT_LOADING,
   });
+  console.log(object)
   mutation(ADD_REVIEW, object)
     .then((response) => {
       if (response) {
