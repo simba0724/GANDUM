@@ -26,6 +26,7 @@ import { reviewsAction, reviewDeleteAction } from "../../store/action";
 import { Loading } from "../components";
 import { convertDateToStringFormat } from "../utils/convertDate";
 import { CSVLink } from "react-csv";
+import ReactStars from "react-rating-stars-component";
 
 const AllReviews = () => {
   const classes = viewStyles();
@@ -120,7 +121,16 @@ const AllReviews = () => {
                             value={Number(review.rating)}
                             readOnly
                           />*/}
-                          {review.rating}
+                          <ReactStars
+                            readOnly
+                            value={review.rating}
+                            size={24}
+                            emptyIcon={<i className="far fa-star"></i>}
+                            halfIcon={<i className="fa fa-star-half-alt"></i>}
+                            fullIcon={<i className="fa fa-star"></i>}
+                            activeColor="#ffd700"
+                            edit={false}
+                          />
                           </TableCell>
                           <TableCell>
                             <Tooltip title="Edit Review" aria-label="delete">

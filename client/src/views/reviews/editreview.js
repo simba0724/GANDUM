@@ -23,6 +23,7 @@ import {
   CardBlocks,
 } from "../components";
 import viewStyles from "../viewStyles";
+import ReactStars from "react-rating-stars-component";
 
 var reviewObj = {
   title: "",
@@ -187,7 +188,7 @@ const EditReview = (props) => {
 
             <Box component="fieldset" mb={3} borderColor="transparent">
               <Typography component="legend">Rating</Typography>
-              <Rating
+{/*              <Rating
                 name="simple-controlled"
                 value={Number(review.rating)}
                 onChange={(event, newValue) => {
@@ -196,6 +197,17 @@ const EditReview = (props) => {
                     rating: String(newValue),
                   });
                 }}
+              />*/}
+              <ReactStars
+                count={parseInt(review.rating)}
+                onChange={(newRating) => {
+                  setreview({...review, rating: newRating.toString()})
+                }}
+                size={24}
+                emptyIcon={<i className="far fa-star"></i>}
+                halfIcon={<i className="fa fa-star-half-alt"></i>}
+                fullIcon={<i className="fa fa-star"></i>}
+                activeColor="#ffd700"
               />
             </Box>
           </CardBlocks>
