@@ -38,7 +38,6 @@ const Orders = (props) => {
   // }, [props.orders]);
 
   useEffect(() => {
-    console.log(props.history)
     const customer_id = Auth.getUserId();
     props.getUserOrdersAction(customer_id);
     setOrders(props.orders);

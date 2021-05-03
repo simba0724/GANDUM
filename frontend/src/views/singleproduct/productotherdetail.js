@@ -230,7 +230,7 @@ const ProductOtherDetails = (props) => {
                             className="fieldset-rating"
                           >
                             <Typography component="legend">Rating</Typography>
-                            <Rating
+                            {/*<Rating
                               name="rating-val"
                               value={parseInt(review.rating)}
                               onChange={(event, newValue) => {
@@ -239,7 +239,7 @@ const ProductOtherDetails = (props) => {
                                   rating: newValue.toString(),
                                 });
                               }}
-                            />
+                            />*/}
                           </Box>
                         </Grid>
                         <Grid item md={12} sm={6} xs={12}>
@@ -304,11 +304,11 @@ const ProductOtherDetails = (props) => {
                               </span>{" "}
                               - {convertDate(singleReview.date)}
                             </Typography>
-                            <Rating
+                            {/*<Rating
                               name="read-only"
                               value={parseInt(singleReview.rating, 10)}
                               readOnly
-                            />
+                            />*/}
                           </Box>
                           <Typography
                             variant="subtitle1"
@@ -438,7 +438,7 @@ const ProductOtherDetails = (props) => {
                             className="fieldset-rating"
                           >
                             <Typography component="legend">Rating</Typography>
-                            <Rating
+                            {/*<Rating
                               name="rating-val"
                               value={parseInt(review.rating)}
                               onChange={(event, newValue) => {
@@ -447,7 +447,7 @@ const ProductOtherDetails = (props) => {
                                   rating: newValue.toString(),
                                 });
                               }}
-                            />
+                            />*/}
                           </Box>
                         </Grid>
                         <Grid item md={12} sm={6} xs={12}>
@@ -513,11 +513,11 @@ const ProductOtherDetails = (props) => {
                             </span>{" "}
                             - {convertDate(singleReview.date)}
                           </Typography>
-                          <Rating
+                          {/*<Rating
                             name="read-only"
                             value={parseInt(singleReview.rating, 10)}
                             readOnly
-                          />
+                          />*/}
                         </Box>
                         <Typography
                           variant="subtitle1"

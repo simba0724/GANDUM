@@ -21,6 +21,8 @@ import Rating from "@material-ui/lab/Rating";
 import { update } from "../../../utils/service_bk";
 import { connect } from "react-redux";
 
+import Auth from "../../../utils/auth";
+
 const AccountSetting = (props) => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -53,11 +55,14 @@ const AccountSetting = (props) => {
   }); //customer info receive via props
 
   useEffect(() => {
-    if (props.customer) {
-      console.log("custInfoprops in account-setting", props.customer);
-      setcustInfo(props.customer);
-    }
-    // console.log("custInfostate", custInfo);
+    let user = Auth.getUser();
+    user.first_name = user.name
+    // if (props.customer) {
+    //   console.log("custInfoprops in account-setting", props.customer);
+    //   setcustInfo(props.customer);
+    // }
+    setcustInfo(user);
+    console.log("custInfostate", user);
   }, []);
 
   const updateDetails = () => {

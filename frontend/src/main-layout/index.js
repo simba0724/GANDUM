@@ -13,7 +13,6 @@ const MainLayout = (props) => {
     <Fragment>
       <BrowserRouter ref={registerNav}>
         <Header />
-        {/*<Alert />*/}
         <Main />
         <Footer />
       </BrowserRouter>

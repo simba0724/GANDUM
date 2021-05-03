@@ -13,6 +13,7 @@ import {
   NativeSelect,
 } from "@material-ui/core";
 import Auth from "../../utils/auth";
+import { getUserOrdersAction } from "../../store/action/checkoutAction";
 
 var billingInfoObject = {
   order_notes: "",
@@ -53,13 +54,20 @@ const BillingForm = (props) => {
 
   useEffect(() => {
     // billingInfoObject
-    var user = Auth.getUser();
-    console.log(user)
-    if(user){
-      billingInfoObject.firstname = user.name;
-      billingInfoObject.lastname = user.last_name;
-      billingInfoObject.email = user.email;
-      billingInfoObject.phone = user.phone;
+    var user_id = Auth.getUserId();
+    props.getUserOrdersAction(user_id);
+    console.log(props.orders);
+    if(props.orders !== null){
+      billingInfoObject.firstname = props.orders[0].billing.firstname;
+      billingInfoObject.lastname = props.orders[0].billing.lastname;
+      billingInfoObject.email = props.orders[0].billing.email;
+      billingInfoObject.phone = props.orders[0].billing.phone;
+      billingInfoObject.company = props.orders[0].billing.company;
+      billingInfoObject.country = props.orders[0].billing.country;
+      billingInfoObject.status = props.orders[0].billing.status;
+      billingInfoObject.city = props.orders[0].billing.city;
+      billingInfoObject.address_line_1 = props.orders[0].shipping.address_line_1;
+      billingInfoObject.address_line_2 = props.orders[0].shipping.address_line_2;
     }
     var allData = {
       billing: billingInfo,
@@ -67,7 +75,7 @@ const BillingForm = (props) => {
       shippingAddress: shippingAdd,
     };
     props.getBillingInfo(allData);
-  }, [shippingInfo, billingInfo, shippingAdd]);
+  }, [shippingInfo, billingInfo, shippingAdd, props.orders]);
 
   const checkoutInputs = (type, label, name, value, inputs) => {
     var validation;
@@ -634,6 +642,11 @@ const BillingForm = (props) => {
 
 const mapStateToProps = (state) => ({
   cart: state.cart,
+  orders: state.checkoutDetail.orders
 });
 
-export default connect(mapStateToProps)(BillingForm);
+const mapDispatchToProps = {
+  getUserOrdersAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BillingForm);
