@@ -77,7 +77,7 @@ module.exports = {
         if (!isEmpty(errors)) {
           throw putError(errors);
         }
-        const tax = await Tax.findOne({});
+        let tax = await Tax.findOne({});
 
         if(tax == null){
           tax = new Tax({

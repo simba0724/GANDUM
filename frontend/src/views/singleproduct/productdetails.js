@@ -168,7 +168,7 @@ const ProductDetail = (props) => {
                   alignItems="center"
                   className="qtyIncDecbtn"
                 >
-                  <Button onClick={() => setQty(qty - 1)} size="small">
+                  <Button onClick={() => {if(qty > 1){setQty(qty - 1)}}} size="small">
                     <Icon>remove</Icon>
                   </Button>
                   <TextField

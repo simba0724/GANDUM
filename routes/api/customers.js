@@ -38,6 +38,7 @@ router.post("/register", (req, res) => {
 
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newCustomer.password, salt, (err, hash) => {
+          console.log(newCustomer.password);
           if (err) throw err;
           newCustomer.password = hash;
           newCustomer
@@ -71,6 +72,7 @@ router.post("/login", (req, res) => {
     }
     // Check Password
     bcrypt.compare(password, customer.password).then((isMatch) => {
+      console.log(password)
       if (isMatch) {
         // Customer Matched
         const payload = {
