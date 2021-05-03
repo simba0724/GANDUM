@@ -126,8 +126,9 @@ export const register = (
   last_name,
   phone,
   email,
-  password,
-  address
+  address,
+  password
+  
 ) => {
   const body = {
     first_name,
