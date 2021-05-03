@@ -256,7 +256,7 @@ const Address = (props) => {
         <Grid item md={6} xs={12}>
           <Card>
             <CardContent>
-              <Grid container spacing={2} className="position-relative">
+              {/*<Grid container spacing={2} className="position-relative">
                 <Tooltip
                   className="default-address"
                   title={
@@ -278,7 +278,7 @@ const Address = (props) => {
                     {custInfo.first_name}, {custInfo.last_name}
                   </Typography>
                 </Grid>
-              </Grid>
+              </Grid>*/}
 
               <Grid container spacing={2}>
                 <Grid item>
