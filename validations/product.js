@@ -53,10 +53,10 @@ module.exports = function validate(method, args) {
       if (!args.shipping || !args.shipping.shipping_class) {
         return (errors = "Please select Shipping class");
       }
-
-       if (!args.tax || !args.tax.tax_class) {
-        return (errors = "Please select Tax class");
-      } 
+      
+      // if (args.tax.tax_class) {
+      //   return (errors = "Please select Tax class");
+      // } 
 
       break;
     }
