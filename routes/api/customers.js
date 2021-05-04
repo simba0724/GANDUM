@@ -138,9 +138,10 @@ router.post("/update", async (req, res) => {
       }
       console.log("inside try");
 
-      customer.name = req.body.name;
+      customer.first_name = req.body.first_name;
+      customer.last_name = req.body.last_name;
       customer.email = req.body.email;
-      customer.role = req.body.role;
+      customer.phone = req.body.phone;
       customer.updated = Date.now();
       let metArra = {};
 

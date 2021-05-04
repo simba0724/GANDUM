@@ -19,7 +19,6 @@ var customerObj = {
   last_name: "",
   email: "",
   password: "",
-  company: "",
   phone: "",
 };
 
@@ -47,7 +46,6 @@ const AddCustomer = () => {
         last_name,
         email,
         password,
-        company,
         phone,
       ] = datum.data;
       if (first_name != "") {
@@ -57,7 +55,6 @@ const AddCustomer = () => {
           last_name,
           email,
           password,
-          company,
           phone,
         };
       }
@@ -142,14 +139,6 @@ const AddCustomer = () => {
                     name="password"
                     value={customer.password}
                     label="Password"
-                    onInputChange={handleChange}
-                  />
-                </Grid>
-                <Grid item md={3} sm={6} xs={12}>
-                  <TextInput
-                    value={customer.company}
-                    label="Company"
-                    name="company"
                     onInputChange={handleChange}
                   />
                 </Grid>

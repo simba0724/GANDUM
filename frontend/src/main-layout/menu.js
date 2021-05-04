@@ -24,8 +24,6 @@ import { withRouter } from "react-router";
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-// import { w3cwebsocket as W3CWebSocket } from "websocket";
-
 const Navigation = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [collaspeAccount, setCollaspeAccount] = useState(false);

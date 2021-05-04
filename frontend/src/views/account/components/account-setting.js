@@ -26,13 +26,11 @@ import Auth from "../../../utils/auth";
 const AccountSetting = (props) => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
-  const [company, setCompany] = useState(null);
   const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [cpassword, setCPassword] = useState(null);
   const [custInfo, setcustInfo] = useState({
-    company: "company",
     email: "test@gmail.com",
     first_name: "first name",
     last_name: "last name",
@@ -42,7 +40,6 @@ const AccountSetting = (props) => {
         address_line1: "test,karachi,pakistan",
         address_line2: "a-123",
         city: "washigton",
-        company: "abc",
         country: "california",
         default_address: false,
         first_name: "miller",
@@ -63,10 +60,15 @@ const AccountSetting = (props) => {
     // }
     setcustInfo(user);
     console.log("custInfostate", user);
+
+    setFirstName(user.name);
+    setLastName(user.last_name);
+    setPhone(user.phone);
+    setEmail(user.email);
   }, []);
 
   const updateDetails = () => {
-    update(firstName, lastName, email, password, phone, company);
+    update(firstName, lastName, email, password, phone);
   };
 
   return (
@@ -131,7 +133,6 @@ const AccountSetting = (props) => {
                 </Grid>
                 <Grid item>
                   <Typography variant="body1">
-                    {custInfo.company}
                     {/* test */}
                   </Typography>
                 </Grid>
@@ -167,20 +168,6 @@ const AccountSetting = (props) => {
                     value={lastName}
                     onChange={(e) => {
                       setLastName(e.target.value);
-                    }}
-                    className="width-100"
-                  />
-                </Grid>
-                <Grid item md={3} xs={12}>
-                  <TextField
-                    type={"text"}
-                    label={"Company"}
-                    name={"company"}
-                    variant="outlined"
-                    size="small"
-                    value={company}
-                    onChange={(e) => {
-                      setCompany(e.target.value);
                     }}
                     className="width-100"
                   />

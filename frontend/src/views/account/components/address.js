@@ -59,7 +59,6 @@ const Address = (props) => {
     const customer_id = Auth.getUserId();
     setCustId(customer_id);
     // props.customerAction(customer_id);
-    console.log(props);
     if (props.customer) {
       console.log("custInfoprops", props.customer[0]);
       // setcustInfo(props.customer[0]);
@@ -118,6 +117,16 @@ const Address = (props) => {
 
     setAddMode(false);
     setEditMode(false);
+    setFirstName("");
+    setLastName("");
+    setCompany("");
+    setPhone("");
+    setAddress1("");
+    setAddress2("");
+    setCity("");
+    setCountry("");
+    setState("");
+    setPincode("");
   };
 
   const deleteAddressBook = (_id) => {
@@ -226,7 +235,7 @@ const Address = (props) => {
                 <Button
                   size="small"
                   color="primary"
-                  onClick={editMode ? updateAddress : addNewAddress}
+                  onClick={editMode ? addNewAddress : addNewAddress}
                   variant="contained"
                 >
                   {editMode ? "Update" : "Add"}

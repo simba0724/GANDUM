@@ -168,7 +168,7 @@ const AllOrders = (props) => {
                       <TableCell>Name</TableCell>
                       <TableCell>Date</TableCell>
                       <TableCell>Status</TableCell>
-                      <TableCell>Category</TableCell>
+                      <TableCell>Total Amount</TableCell>
                       <TableCell>Actions</TableCell>
                     </TableRow>
                   </TableHead>
@@ -213,11 +213,9 @@ const AllOrders = (props) => {
                               {order.status}
                             </span>
                           </TableCell>
-                          {/* <TableCell>
-                            {order.categoryId
-                              .map((cat) => cat.name)
-                              .join(", ")}
-                          </TableCell> */}
+                          <TableCell>
+                            {order.total}
+                          </TableCell>
                           <TableCell>
                             <Tooltip title="Edit Order" aria-label="edit">
                               <IconButton
