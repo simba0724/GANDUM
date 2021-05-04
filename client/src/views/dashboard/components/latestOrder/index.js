@@ -58,7 +58,9 @@ const LatestOrders = ({ ordersState }) => {
               {ordersState.orders.slice(0, 2).map((order) => (
                 <TableRow hover key={order.id}>
                   <TableCell>
-                    {order.shipping.firstname + " " + order.shipping.lastname}
+                    {order.customer_id ? (order.customer_id.first_name +
+                              " " +
+                              order.customer_id.last_name): null}
                   </TableCell>
                   <TableCell>{convertDateToStringFormat(order.date)}</TableCell>
                   <TableCell>

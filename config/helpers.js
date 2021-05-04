@@ -165,95 +165,16 @@ const jimpResize = (path, i, uploadPath, filename) => {
 
 const imageUpload = async (upload, uploadPath) => {
   return new Promise(async (resolve, reject) => {
-    try {
-      let { filename, mimetype, encoding, createReadStream } = await upload;
-
-      const extensions = ["gif", "jpeg", "jpg", "png", "webp", "svg"];
-      let ext = filename.split(".");
-      ext = ext.pop();
-      ext = ext.toLowerCase();
-      if (!~extensions.indexOf(ext)) {
-        return resolve({
-          success: false,
-          message: "This extension not allowed",
-        });
-      }
-
-      let stream = createReadStream();
-
-      filename = slugify(filename, { lower: true, replacement: "-" });
-      filename = Date.now() + "-" + filename;
-
-      let original = uploadPath + "original/" + filename;
-      let large = uploadPath + "large/" + filename;
-      let medium = uploadPath + "medium/" + filename;
-      let thumbnail = uploadPath + "thumbnail/" + filename;
-      let path = "." + original;
-
-      if (!fs.existsSync("." + uploadPath + "original/")) {
-        return resolve({
-          success: false,
-          message: "Path does not exist",
-        });
-      }
-
-      stream
-        .on("error", (error) => {
-          console.log(JSON.stringify(error));
-
-          fs.unlink(path, function (err) {
-            if (err) console.log(err);
-          });
-          return resolve({
-            success: false,
-            message: "This image can't be upload 1",
-          });
-        })
-
-        .pipe(fs.createWriteStream(path))
-
-        .on("finish", async () => {
-          for (let i in sizes) {
-            if (ext === "svg") {
-              fs.copyFileSync(path, `.${uploadPath + i}/${filename}`);
-              continue;
-            }
-
-            let resized = await sharpResize(path, i, uploadPath, filename);
-            console.log("ye dekh -->> ", resized);
-
-            if (resized) {
-              continue;
-            } else {
-              //fs.unlinkSync(path);
-              fs.unlink(path, function (err) {
-                if (err) console.log(err);
-              });
-              return resolve({
-                success: false,
-                message: "This image can't be upload 2",
-              });
-            }
-          }
-
-          return resolve({
-            success: true,
-            data: {
-              original,
-              large,
-              medium,
-              thumbnail,
-            },
-          });
-        });
-    } catch (error) {
-      console.log(error);
-      return resolve({
-        success: false,
-        message: "This image can't be upload 3",
-      });
-    }
-  });
+    return resolve({
+      success: true,
+      data: {
+        original:"original",
+        large:"large",
+        medium:"medium",
+        thumbnail:"thumbnail",
+      },
+    });
+  })
 };
 
 module.exports.imageUpload = imageUpload;

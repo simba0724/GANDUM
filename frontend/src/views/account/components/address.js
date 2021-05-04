@@ -112,7 +112,6 @@ const Address = (props) => {
       pincode: pincode,
       default_address: defaultAddress,
     };
-    console.log(custInfoBody);
     props.addressbookAddAction(custInfoBody);
 
     setAddMode(false);

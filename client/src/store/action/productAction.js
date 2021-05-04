@@ -232,7 +232,6 @@ export const productAddAction = (object) => (dispatch) => {
         type: TINYMCE_DESCRIPTION_NULL,
         payload: {},
       });
-console.log(error)
       return dispatch({
         type: ALERT_SUCCESS,
         payload: { boolean: true, message: error, error: true },
@@ -306,7 +305,7 @@ export const productUpdateAction = (object) => (dispatch) => {
           payload: response.data.updateProduct,
         });
 
-        jumpTo("/all-products");
+        jumpTo("/admin/all-products");
 
         dispatch({
           type: ALERT_SUCCESS,

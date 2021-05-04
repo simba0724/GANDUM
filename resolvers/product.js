@@ -572,17 +572,17 @@ module.exports = {
           throw putError("Name already exist.");
         } else {
           //const isSku = await Product.findOne({ sku: args.sku });
-          // let imgObject = "";
-          // if (args.feature_image) {
-          //   imgObject = await imageUpload(
-          //     args.feature_image[0],
-          //     "/assets/images/product/feature/"
-          //   );
+          let imgObject = "";
+          if (args.feature_image) {
+            imgObject = await imageUpload(
+              args.feature_image[0],
+              "/assets/images/product/feature/"
+            );
 
-          //   if (imgObject.success === false) {
-          //     throw putError(imgObject.message);
-          //   }
-          // }
+            if (imgObject.success === false) {
+              throw putError(imgObject.message);
+            }
+          }
 
           // let imgArray = [];
           // if (args.gallery_image) {
@@ -699,6 +699,7 @@ module.exports = {
           } */
 
           let imgObject = "";
+
           if (args.update_feature_image) {
             imgObject = await imageUpload(
               args.update_feature_image[0],
