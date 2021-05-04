@@ -232,7 +232,7 @@ export const productAddAction = (object) => (dispatch) => {
         type: TINYMCE_DESCRIPTION_NULL,
         payload: {},
       });
-
+console.log(error)
       return dispatch({
         type: ALERT_SUCCESS,
         payload: { boolean: true, message: error, error: true },

@@ -43,20 +43,20 @@ module.exports = function validate(method, args) {
           return (errors = "Please fill all custom field");
         }
       }
-      /*  if (
+        if (
         typeof args.pricing != "object" ||
         !Object.keys(args.pricing).length
       ) {
         return (errors = "Pricing field is required");
-      } */
+      } 
 
       if (!args.shipping || !args.shipping.shipping_class) {
         return (errors = "Please select Shipping class");
       }
 
-      /* if (!args.tax || !args.tax.tax_class) {
+       if (!args.tax || !args.tax.tax_class) {
         return (errors = "Please select Tax class");
-      } */
+      } 
 
       break;
     }

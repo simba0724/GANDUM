@@ -49,7 +49,6 @@ var SingleCustomerObject = {
   _id: "",
   first_name: "",
   last_name: "",
-  company: "",
   phone: "",
   address_line1: "",
   address_line2: "",
@@ -64,7 +63,6 @@ var customerObj = {
   last_name: "",
   email: "",
   password: "",
-  company: "",
   phone: "",
 };
 
@@ -88,13 +86,14 @@ const EditCustomer = (props) => {
 
     for (let i in Customers.customers) {
       if (Customers.customers[i].id === props.match.params.id) {
+        console.log(Customers.customers[i]);
         SingleCustomerObject.id = Customers.customers[i].id;
         setSingleCustomer(SingleCustomerObject);
         setcustomer({ ...customer, ...Customers.customers[i] });
         break;
       }
     }
-
+    console.log(singleCustomer)
     setEditMode(false);
   }, [Customers.customers]);
 
@@ -209,14 +208,6 @@ const EditCustomer = (props) => {
                 </Grid>
                 <Grid item md={3} sm={6} xs={12}>
                   <TextInput
-                    value={customer.company}
-                    label="Company"
-                    name="company"
-                    onInputChange={handleChange}
-                  />
-                </Grid>
-                <Grid item md={3} sm={6} xs={12}>
-                  <TextInput
                     value={customer.phone}
                     label="Phone"
                     name="phone"
@@ -235,8 +226,6 @@ const EditCustomer = (props) => {
                 {addressInput("First Name", "first_name")}
 
                 {addressInput("Last Name", "last_name")}
-
-                {addressInput("Company", "company")}
 
                 {addressInput("Phone", "phone")}
 
@@ -356,12 +345,6 @@ const EditCustomer = (props) => {
                                   address.first_name + " " + address.last_name
                                 }
                               />
-                            </ListItem>
-                            <ListItem>
-                              <ListItemIcon>
-                                <BusinessIcon />
-                              </ListItemIcon>
-                              <ListItemText primary={address.company} />
                             </ListItem>
                             <ListItem>
                               <ListItemIcon>

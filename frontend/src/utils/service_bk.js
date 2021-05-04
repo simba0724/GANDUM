@@ -160,8 +160,7 @@ export const update = (
   lastName,
   email,
   password,
-  phone,
-  company
+  phone
 ) => {
   const user_id = Auth.getUserId();
   const body = {
@@ -171,7 +170,6 @@ export const update = (
     email: email,
     password: password,
     phone: phone,
-    company: company,
   };
 
   axios
@@ -180,7 +178,8 @@ export const update = (
 
     .then((res) => {
       if (res.data) {
-        jumpTo("/");
+        Auth.logout();
+        window.location.href = "/login";
         return res;
       }
     })
