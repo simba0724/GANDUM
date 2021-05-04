@@ -21,7 +21,6 @@ module.exports = function validate(method, args) {
     }
     case "addProduct": {
       let errors = "";
-
       if (!args.name || Validator.isEmpty(args.name)) {
         return (errors = "Name field is required");
       }
@@ -53,9 +52,12 @@ module.exports = function validate(method, args) {
       if (!args.shipping || !args.shipping.shipping_class) {
         return (errors = "Please select Shipping class");
       }
-      
-      // if (args.tax.tax_class) {
-      //   return (errors = "Please select Tax class");
+
+       // if (!args.tax) {
+        console.log(args.tax_class)
+        if(!args.tax_class){
+          return (errors = "Please select Tax class");
+        }
       // } 
 
       break;

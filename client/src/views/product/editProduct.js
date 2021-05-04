@@ -551,7 +551,7 @@ const EditProduct = (props) => {
               <Box component="span">
                 <CardBlocks title="Status" nomargin>
                   <RadioGroup
-                    defaultValue="Draft"
+                    defaultValue={productState.product ? productState.product.status : "Draft" }
                     name="status"
                     onChange={handleChange}
                     row
