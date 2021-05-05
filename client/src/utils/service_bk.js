@@ -105,6 +105,7 @@ export const login = (email, password) => {
     data: body,
   }).then((res) => {
     Auth.setUserToken(res.data);
+    jumpTo("/admin/dashboard");
     return res;
   });
 };
