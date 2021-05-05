@@ -181,7 +181,7 @@ const Footer = (props) => {
           <Typography variant="body1" className="copyright-text">
             Copyright © 2021
             <a href="" target="_blank" rel="noopener noreferrer">
-              Gandom Mart
+              - Gandom Mart
             </a>
           </Typography>
           <Typography variant="body1" className="copyright-text">
