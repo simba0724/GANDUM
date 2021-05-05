@@ -179,9 +179,9 @@ const Footer = (props) => {
           flexDirection="column"
         >
           <Typography variant="body1" className="copyright-text">
-            © Copyright-2021
+            Copyright © 2021
             <a href="" target="_blank" rel="noopener noreferrer">
-               Gandom Mart
+              Gandom Mart
             </a>
           </Typography>
           <Typography variant="body1" className="copyright-text">
@@ -189,9 +189,9 @@ const Footer = (props) => {
               href="http://codevely.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{"fontSize": "12px", "opicity":"0.8"}}
+              style={{fontSize: "10px", fontWeight: 300, marginTop: "3px", letterSpacing: "0.33px"}}
             >
-              All Right Reserved
+              Developed by Codevely Studio
             </a>
           </Typography>
         </Box>
