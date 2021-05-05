@@ -22,14 +22,18 @@ const AllShippingComponent = ({
 }) => {
   const classes = viewStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -66,7 +70,12 @@ const AllShippingComponent = ({
                           <IconButton
                             aria-label='Delete'
                             className={classes.deleteicon}
-                            onClick={() => deleteShipping(shipping._id)}
+                            onClick={() => {
+                              if(
+                                window.confirm("Are you sure you want to delete this shipping?")
+                              )
+                              deleteShipping(shipping._id)
+                            }}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -79,7 +88,7 @@ const AllShippingComponent = ({
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 20]}
+        rowsPerPageOptions={[100, 200, 500, "all"]}
         component='div'
         count={shippingState.shipping.shipping_class.length}
         rowsPerPage={rowsPerPage}

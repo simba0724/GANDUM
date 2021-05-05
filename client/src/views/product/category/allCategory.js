@@ -62,7 +62,7 @@ const AllCategory = (props) => {
   const [editMode, setEditmode] = useState(false);
   const [featuredImage, setfeaturedImage] = useState(null);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(100);
 
   const [selected, setSelected] = useState([]);
   const [dataToShow, setDataToShow] = useState(products.categories);
@@ -291,9 +291,14 @@ const AllCategory = (props) => {
                               <IconButton
                                 aria-label="Delete"
                                 className={classes.deleteicon}
-                                onClick={() =>
+                                onClick={() => {
+                                  if (
+                                    window.confirm(
+                                      "Are you sure you want to delete this category?"
+                                    )
+                                  )
                                   dispatch(categoryDeleteAction(cat.id))
-                                }
+                                }}
                               >
                                 <DeleteIcon />
                               </IconButton>
@@ -305,7 +310,7 @@ const AllCategory = (props) => {
               </Table>
             </TableContainer>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 20]}
+              rowsPerPageOptions={[100 , 200, 500]}
               component="div"
               count={categories.length}
               rowsPerPage={rowsPerPage}

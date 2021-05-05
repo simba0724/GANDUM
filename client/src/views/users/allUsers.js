@@ -32,14 +32,18 @@ const AllUsers = () => {
   const UsersState = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -113,9 +117,12 @@ const AllUsers = () => {
                             <IconButton
                               aria-label='Delete'
                               className={classes.deleteicon}
-                              onClick={() =>
+                              onClick={() =>{
+                                if(
+                                  window.confirm("Are you sure you want to delete this user?")
+                                )
                                 dispatch(userDeleteAction(user.id))
-                              }
+                              }}
                             >
                               <DeleteIcon />
                             </IconButton>
@@ -126,7 +133,7 @@ const AllUsers = () => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 300, "all"]}
                 component='div'
                 count={UsersState.users.length}
                 rowsPerPage={rowsPerPage}

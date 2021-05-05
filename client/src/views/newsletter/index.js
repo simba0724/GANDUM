@@ -32,7 +32,7 @@ const AllReviews = () => {
   const dispatch = useDispatch();
   const reviewState = useSelector((state) => state.newsletter);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   useEffect(() => {
     if (!reviewState.newsletters.length) {
@@ -45,7 +45,11 @@ console.log(reviewState);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -109,7 +113,7 @@ console.log(reviewState);
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 500, "all"]}
                 component="div"
                 count={reviewState.newsletters.length}
                 rowsPerPage={rowsPerPage}

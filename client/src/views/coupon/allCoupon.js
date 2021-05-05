@@ -33,7 +33,7 @@ const AllCoupons = () => {
   const dispatch = useDispatch();
   const Coupons = useSelector((state) => state.coupons);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   useEffect(() => {
     if (isEmpty(Coupons.coupons)) {
@@ -46,7 +46,11 @@ const AllCoupons = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -139,9 +143,12 @@ const AllCoupons = () => {
                               <IconButton
                                 aria-label="Delete"
                                 className={classes.deleteicon}
-                                onClick={() =>
+                                onClick={() =>{
+                                  if(
+                                    window.confirm("Are you sure you want to delete this coupon?")
+                                  )
                                   dispatch(couponDeleteAction(coupon.id))
-                                }
+                                }}
                               >
                                 <DeleteIcon />
                               </IconButton>
@@ -153,7 +160,7 @@ const AllCoupons = () => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 500, "all"]}
                 component="div"
                 count={Coupons.coupons.length}
                 rowsPerPage={rowsPerPage}
