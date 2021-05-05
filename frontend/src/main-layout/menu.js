@@ -24,6 +24,8 @@ import { withRouter } from "react-router";
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+import "./menu.css";
+
 const Navigation = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [collaspeAccount, setCollaspeAccount] = useState(false);
@@ -115,7 +117,7 @@ const Navigation = (props) => {
                 style={{
                   backgroundColor: "#9eb876",
                   borderRadius: 5,
-                  padding: 3,
+                  padding: 5,
                 }}
               >
                 shopping_cart
@@ -151,7 +153,7 @@ const Navigation = (props) => {
               style={{
                 backgroundColor: "#9eb876",
                 borderRadius: 5,
-                padding: 3,
+                padding: 5,
               }}
               className="account-menu-link"
             >
