@@ -132,12 +132,12 @@ export const addressbookAddAction = (object) => (dispatch) => {
           type: CUSTOMERS_SUCCESS,
           payload: response.data.addAddressBook,
         });
-
+        window.toast("Address is succefully added.");
         return dispatch({
           type: ALERT_SUCCESS,
           payload: {
             boolean: true,
-            message: "Address added successfully",
+            message: "Address is successfully added",
             error: false,
           },
         });

@@ -98,7 +98,8 @@ router.post("/login", (req, res) => {
               last_name: customer.last_name,
               email: customer.email,
               phone: customer.phone,
-              wishlist: customer.wishlist
+              wishlist: customer.wishlist,
+              address: customer.address_book
             });
           }
         );

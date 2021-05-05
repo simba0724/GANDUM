@@ -18,14 +18,18 @@ import { CardBlocks } from "../../components";
 const AllTaxesComponent = ({ taxState, editTaxChange, deleteTaxChange }) => {
   const classes = viewStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -63,7 +67,12 @@ const AllTaxesComponent = ({ taxState, editTaxChange, deleteTaxChange }) => {
                           <IconButton
                             aria-label='Delete'
                             className={classes.deleteicon}
-                            onClick={() => deleteTaxChange(tax._id)}
+                            onClick={() => {
+                              if(
+                                window.confirm("Are you sure you want to delete this tax?")
+                              )
+                              deleteTaxChange(tax._id)
+                            }}
                           >
                             <DeleteIcon />
                           </IconButton>
@@ -76,7 +85,7 @@ const AllTaxesComponent = ({ taxState, editTaxChange, deleteTaxChange }) => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 20]}
+        rowsPerPageOptions={[100, 200, 500, "all"]}
         component='div'
         count={taxState.tax.tax_class.length}
         rowsPerPage={rowsPerPage}

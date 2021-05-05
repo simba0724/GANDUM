@@ -108,6 +108,7 @@ export const login = (email, password) => {
     .post("/api/customers/login", body)
     // .post("http://localhost:8000/api/customers/login", body)
     .then((res) => {
+      console.log(res.data)
       Auth.setUserToken(res.data);
       cookie.save("wishlist", res.data.wishlist, { path: "/" });
       customerWishlist(res.data.wishlist);
@@ -180,6 +181,7 @@ export const update = (
       if (res.data) {
         Auth.logout();
         window.location.href = "/login";
+        window.toast("Profile is succefully updated.");
         return res;
       }
     })

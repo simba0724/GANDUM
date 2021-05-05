@@ -57,11 +57,14 @@ const Address = (props) => {
 
   useEffect(() => {
     const customer_id = Auth.getUserId();
+    const customer = Auth.getUser();
     setCustId(customer_id);
     // props.customerAction(customer_id);
-    if (props.customer) {
-      console.log("custInfoprops", props.customer[0]);
-      // setcustInfo(props.customer[0]);
+    if (customer_id) {
+      console.log("custInfoprops", customer);
+      if(customer.address.length > 0){
+        setcustInfo(customer.address[0]);
+      }
       // setAddrId(props.customer[0]._id);
     }
     // console.log("custInfostate", custInfo);
@@ -294,6 +297,7 @@ const Address = (props) => {
                 </Grid>
                 <Grid item>
                   <Typography variant="body1">
+                    {console.log(custInfo)}
                     {custInfo.address_line1},{custInfo.address_line2}
                     {/* test */}
                   </Typography>

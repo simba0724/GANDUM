@@ -39,7 +39,7 @@ const AllReviews = () => {
   })
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   useEffect(() => {
     if (!reviewState.reviews.length) {
@@ -52,7 +52,11 @@ const AllReviews = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -147,9 +151,12 @@ const AllReviews = () => {
                               <IconButton
                                 aria-label="Delete"
                                 className={classes.deleteicon}
-                                onClick={() =>
+                                onClick={() =>{
+                                  if(
+                                    window.confirm("Are you sure you want to delete this review?")
+                                  )
                                   dispatch(reviewDeleteAction(review.id))
-                                }
+                                }}
                               >
                                 <DeleteIcon />
                               </IconButton>
@@ -161,7 +168,7 @@ const AllReviews = () => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 500, "all"]}
                 component="div"
                 count={reviewState.reviews.length}
                 rowsPerPage={rowsPerPage}

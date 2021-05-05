@@ -38,7 +38,7 @@ const AllBrands = (props) => {
   const dispatch = useDispatch();
   const Brands = useSelector((state) => state.brands);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   const [selected, setSelected] = useState([]);
   const [dataToShow, setDataToShow] = useState(Brands.brands);
@@ -57,7 +57,11 @@ const AllBrands = (props) => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -216,9 +220,14 @@ const AllBrands = (props) => {
                               <IconButton
                                 aria-label="Delete"
                                 className={classes.deleteicon}
-                                onClick={() =>
+                                onClick={() => {
+                                  if (
+                                    window.confirm(
+                                      "Are you sure you want to delete this brand?"
+                                    )
+                                  )
                                   dispatch(brandDeleteAction(brand.id))
-                                }
+                                }}
                               >
                                 <DeleteIcon />
                               </IconButton>
@@ -230,7 +239,7 @@ const AllBrands = (props) => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 500, "all"]}
                 component="div"
                 count={Brands.brands.length}
                 rowsPerPage={rowsPerPage}
