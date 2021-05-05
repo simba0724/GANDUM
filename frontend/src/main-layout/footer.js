@@ -189,7 +189,7 @@ const Footer = (props) => {
               href="http://codevely.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{fontSize: "11px", fontWeight: 300, marginTop: "3px", letterSpacing: "0.33px"}}
+              style={{fontSize: "10px", fontWeight: 300, marginTop: "3px", letterSpacing: "0.33px"}}
             >
               Developed by Codevely Studio
             </a>
