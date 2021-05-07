@@ -20,9 +20,27 @@ import Rating from "@material-ui/lab/Rating";
 import {
   addressbookAddAction,
   customerAction,
+  updateAddress
 } from "../../../store/action/customerAction";
 import { connect, useDispatch } from "react-redux";
 import Auth from "../../../utils/auth";
+import EmailIcon from '@material-ui/icons/Email';
+import BusinessIcon from '@material-ui/icons/Business';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
 
 const Address = (props) => {
   const [editMode, setEditMode] = useState(false);
@@ -40,19 +58,10 @@ const Address = (props) => {
   const [state, setState] = useState("");
   const [pincode, setPincode] = useState("");
   const [defaultAddress, setDefaultAddress] = useState("");
-  const [custInfo, setcustInfo] = useState({
-    first_name: "first name",
-    last_name: "last name",
-    company: "company",
-    phone: "phone",
-    address_line1: "address1",
-    address_line2: "address2",
-    city: "city",
-    country: "country",
-    state: "state",
-    pincode: "pincode",
-    default_address: "default_address",
-  }); //customer info receive via props
+  const [custInfo, setcustInfo] = useState([]); //customer info receive via props
+
+  const classes = useStyles();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,13 +70,10 @@ const Address = (props) => {
     setCustId(customer_id);
     // props.customerAction(customer_id);
     if (customer_id) {
-      console.log("custInfoprops", customer);
       if(customer.address.length > 0){
-        setcustInfo(customer.address[0]);
+        setcustInfo(customer.address);
       }
-      // setAddrId(props.customer[0]._id);
     }
-    // console.log("custInfostate", custInfo);
   }, []);
   const addressInput = (label, name, type, value, setFunction) => {
     return (
@@ -96,13 +102,29 @@ const Address = (props) => {
     setAddMode(false);
   };
 
-  const updateAddress = () => {
-    console.log("heello");
+  const setMainAddress = (id) => {
+    const custInfoBody = {
+      id: Auth.getUserId(),
+      _id: custInfo[id]._id,
+      index: id,
+      first_name: custInfo[id].first_name,
+      last_name: custInfo[id].last_name,
+      company: custInfo[id].company,
+      phone: custInfo[id].phone,
+      address_line1: custInfo[id].address_line1,
+      address_line2: custInfo[id].address_line2,
+      city: custInfo[id].city,
+      country: custInfo[id].country,
+      state: custInfo[id].state,
+      pincode: custInfo[id].pincode,
+      default_address: true
+    };
+    props.updateAddress(custInfoBody);
   };
 
   const addNewAddress = () => {
     const custInfoBody = {
-      id: custId,
+      id: Auth.getUserId(),
       first_name: firstName,
       last_name: lastName,
       company: company,
@@ -264,86 +286,57 @@ const Address = (props) => {
           </Fade>
         </Grid>
 
-        <Grid item md={6} xs={12}>
+        <Grid item md={12} xs={12}>
           <Card>
             <CardContent>
-              {/*<Grid container spacing={2} className="position-relative">
-                <Tooltip
-                  className="default-address"
-                  title={
-                    1 === 1
-                      ? "Default Address"
-                      : "Edit the address and check the 'Default Address' option to make it your default address."
-                  }
-                  aria-label="Default-Address"
-                >
-                  <Button>
-                    <Rating name="Default Address" value={1} max={1} readOnly />
-                  </Button>
-                </Tooltip>
-                <Grid item>
-                  <Icon>face</Icon>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">
-                    {custInfo.first_name}, {custInfo.last_name}
-                  </Typography>
-                </Grid>
-              </Grid>*/}
-
-              <Grid container spacing={2}>
-                <Grid item>
-                  <Icon>home</Icon>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">
-                    {console.log(custInfo)}
-                    {custInfo.address_line1},{custInfo.address_line2}
-                    {/* test */}
-                  </Typography>
-                  <Typography variant="body1">
-                    {custInfo.city}, {custInfo.state}, {custInfo.pincode}
-                    {/* test */}
-                  </Typography>
-                  <Typography variant="body1">
-                    {custInfo.country}
-                    {/* test */}
-                  </Typography>
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={2}>
-                <Grid item>
-                  <Icon>call</Icon>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">Phone No.</Typography>
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={2}>
-                <Grid item>
-                  <Icon>
-                    {custInfo.email}
-                    {/* teste */}
-                  </Icon>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">Email</Typography>
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={2}>
-                <Grid item>
-                  <Icon>business</Icon>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">
-                    {custInfo.company}
-                    {/* test */}
-                  </Typography>
-                </Grid>
-              </Grid>
+              <TableContainer className="width-100" component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">
+                        No
+                      </TableCell>
+                      <TableCell align="center">
+                        <Icon>home</Icon> Address
+                      </TableCell>
+                      <TableCell align="center">
+                        <BusinessIcon /> Company
+                      </TableCell>
+                      <TableCell align="center">
+                        <Icon>call</Icon> Call
+                      </TableCell>
+                      <TableCell align="center">
+                        <EmailIcon /> Email
+                      </TableCell>
+                      <TableCell align="center">Action</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {
+                      custInfo?
+                        custInfo.length > 0 ?
+                          custInfo.map((a, i) => (
+                            <TableRow key={i}>
+                              <TableCell align="center">{i + 1}</TableCell>
+                              <TableCell align="center">{a.address_line1}, {a.address_line2}</TableCell>
+                              <TableCell align="center">{a.company}</TableCell>
+                              <TableCell align="center">{a.phone}</TableCell>
+                              <TableCell align="center">{Auth.getUser().email}</TableCell>
+                              <TableCell align="center">
+                                {a.default_address == true ?"main":(
+                                  <Button variant="outlined" color="primary" onClick={() => setMainAddress(i)}>
+                                    set main
+                                  </Button>
+                                )}
+                              </TableCell>
+                            </TableRow>
+                          ))
+                        :null
+                      :null
+                    }
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </CardContent>
             <CardActions>
               <Button
@@ -351,14 +344,7 @@ const Address = (props) => {
                 color="primary"
                 onClick={() => editAddress("address")}
               >
-                EDIT
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => deleteAddressBook("ID")}
-              >
-                DELETE
+                ADD
               </Button>
             </CardActions>
           </Card>
@@ -375,6 +361,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   addressbookAddAction,
   customerAction,
+  updateAddress
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Address);

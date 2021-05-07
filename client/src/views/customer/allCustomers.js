@@ -38,7 +38,7 @@ const AllCustomers = () => {
   const dispatch = useDispatch();
   const Customers = useSelector((state) => state.customers);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
@@ -56,7 +56,11 @@ const AllCustomers = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -230,8 +234,14 @@ const AllCustomers = () => {
                               <IconButton
                                 aria-label="Delete"
                                 className={classes.deleteicon}
-                                onClick={() =>
+                                onClick={() =>{
+                                  if (
+                                      window.confirm(
+                                        "Are you sure you want to delete this item from database?"
+                                      )
+                                    )
                                   dispatch(customerDeleteAction(customer.id))
+                                }
                                 }
                               >
                                 <DeleteIcon />
@@ -244,7 +254,7 @@ const AllCustomers = () => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 500, "all"]}
                 component="div"
                 count={Customers.customers.length}
                 rowsPerPage={rowsPerPage}

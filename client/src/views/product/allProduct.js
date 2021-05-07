@@ -61,10 +61,13 @@ const AllProduct = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
-  console.log(dataToShow);
 
   return (
     <Fragment>
@@ -263,7 +266,7 @@ const AllProduct = () => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20, 50, 100, 200]}
+                rowsPerPageOptions={[5, 10, 20, 50, 100, 200, "all"]}
                 component="div"
                 count={products.products.length}
                 rowsPerPage={rowsPerPage}

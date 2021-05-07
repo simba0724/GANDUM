@@ -17,11 +17,27 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
+import EmailIcon from '@material-ui/icons/Email';
 
 import { update } from "../../../utils/service_bk";
 import { connect } from "react-redux";
 
 import Auth from "../../../utils/auth";
+
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
 
 const AccountSetting = (props) => {
   const [firstName, setFirstName] = useState(null);
@@ -93,19 +109,18 @@ const AccountSetting = (props) => {
                   <Icon>home</Icon>
                 </Grid>
                 <Grid item>
-                  <Typography variant="body1">
-                   {/* {custInfo.address_book[0].address_line1},
-                    {custInfo.address_book[0].address_line1}*/}
-                    {/* test */}
-                  </Typography>
-                  <Typography variant="body1">
-                    {/*{custInfo.address_book[0].city},
-                    {custInfo.address_book[0].state},*/}
-                  </Typography>
-                  <Typography variant="body1">
-                    {/*{custInfo.address_book[0].country}*/}
-                    {/* test */}
-                  </Typography>
+                  {
+                    custInfo.address?
+                      custInfo.address.length > 0 ?
+                        (
+                          <Typography variant="body1">
+                           {custInfo.address[0].address_line1}, 
+                           {custInfo.address[0].address_line2}
+                          </Typography>
+                        )
+                      :null
+                    :null
+                  }
                 </Grid>
               </Grid>
 
@@ -120,21 +135,10 @@ const AccountSetting = (props) => {
 
               <Grid container spacing={2}>
                 <Grid item>
-                  <Icon>Email</Icon>
+                  <EmailIcon />
                 </Grid>
                 <Grid item>
                   <Typography variant="body1">{custInfo.email}</Typography>
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={2}>
-                <Grid item>
-                  <Icon>business</Icon>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1">
-                    {/* test */}
-                  </Typography>
                 </Grid>
               </Grid>
             </CardContent>

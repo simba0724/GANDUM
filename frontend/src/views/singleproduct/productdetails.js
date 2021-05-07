@@ -15,7 +15,7 @@ import ProductOtherDetails from "./productotherdetail";
 
 const ProductDetail = (props) => {
   const [product, setProduct] = useState(null);
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(0);
 
   useEffect(() => {
     setProduct(props.details);
@@ -46,6 +46,15 @@ const ProductDetail = (props) => {
   const handlechange = (e) => {
     setQty(e.target.value);
   };
+
+  useEffect(() => {
+    let p = props.cart.products.filter((c) => c.id === props.details.id);
+    if(p.length > 0){
+      setQty(p[0].qty)
+    } else {
+      setQty(0)
+    }
+  }, []);
 
   return (
     <Fragment>
@@ -168,7 +177,7 @@ const ProductDetail = (props) => {
                   alignItems="center"
                   className="qtyIncDecbtn"
                 >
-                  <Button onClick={() => {if(qty > 1){setQty(qty - 1)}}} size="small">
+                  <Button onClick={() => {if(qty > 0){setQty(qty - 1)}}} size="small">
                     <Icon>remove</Icon>
                   </Button>
                   <TextField
@@ -191,7 +200,7 @@ const ProductDetail = (props) => {
                   disabled={product.quantity < 1 ? true : false}
                   size="large"
                 >
-                  {product.cart ? "Add More" : "Add To Cart"}
+                  {qty > 0 ? "Add More" : "Add To Cart"}
                 </Button>
               </Box>
             </Box>

@@ -190,7 +190,7 @@ const Shop = (props) => {
                 </ListItem>
                 {flag?(
                   <ListItem button>
-                    <ListItemText variant="h4" primary={"Clear All Filter"} onClick={clearFilter} style={{"fontStyle": "italic", "textDecoration": "underline"}} />
+                    <ListItemText variant="h4" primary={"Clear All Filter"} onClick={clearFilter} style={{"fontStyle": "'Josefin Sans', sans-serif !important", "textDecoration": "underline"}} />
                   </ListItem>
                 ):null}
               </List>
