@@ -133,6 +133,64 @@ export const addressbookAddAction = (object) => (dispatch) => {
           payload: response.data.addAddressBook,
         });
         window.toast("Address is succefully added.");
+
+        let user = Auth.getUser();
+        let address = user.address;
+        address.push(object);
+        user = {
+          ...user,
+          address
+        };
+        Auth.setUserToken(user)
+        window.location.href = "/account/profile";
+        return dispatch({
+          type: ALERT_SUCCESS,
+          payload: {
+            boolean: true,
+            message: "Address is successfully added",
+            error: false,
+          },
+        });
+      }
+    })
+    .catch((error) => {
+      dispatch({
+        type: CUSTOMER_FAIL,
+      });
+      return dispatch({
+        type: ALERT_SUCCESS,
+        payload: { boolean: true, message: error, error: true },
+      });
+    });
+};
+
+export const updateAddress = (object) => (dispatch) => {
+  dispatch({
+    type: CUSTOMER_LOADING,
+  });
+  mutation(UPDATE_ADDRESSBOOK, object)
+    .then((response) => {
+      if (response) {
+        dispatch({
+          type: CUSTOMERS_SUCCESS,
+          payload: response.data.addAddressBook,
+        });
+        window.toast("Address is succefully updated.");
+
+        let user = Auth.getUser();
+        let address = user.address;
+        for (let i in address) {
+          if (address[i].default_address) {
+            address[i].default_address = false;
+          }
+        }
+        address[object.index] = object;
+        user = {
+          ...user,
+          address
+        };
+        Auth.setUserToken(user)
+        window.location.href = "/account/profile";
         return dispatch({
           type: ALERT_SUCCESS,
           payload: {

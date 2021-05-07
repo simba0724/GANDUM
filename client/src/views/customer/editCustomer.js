@@ -87,8 +87,8 @@ const EditCustomer = (props) => {
     for (let i in Customers.customers) {
       if (Customers.customers[i].id === props.match.params.id) {
         console.log(Customers.customers[i]);
-        SingleCustomerObject.id = Customers.customers[i].id;
-        setSingleCustomer(SingleCustomerObject);
+        // SingleCustomerObject.id = Customers.customers[i].id;
+        // setSingleCustomer(SingleCustomerObject);
         setcustomer({ ...customer, ...Customers.customers[i] });
         break;
       }

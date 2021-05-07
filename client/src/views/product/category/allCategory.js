@@ -75,7 +75,11 @@ const AllCategory = (props) => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -310,7 +314,7 @@ const AllCategory = (props) => {
               </Table>
             </TableContainer>
             <TablePagination
-              rowsPerPageOptions={[100 , 200, 500]}
+              rowsPerPageOptions={[100 , 200, 500, "all"]}
               component="div"
               count={categories.length}
               rowsPerPage={rowsPerPage}

@@ -40,7 +40,7 @@ const AllOrders = (props) => {
   }, []);
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(100);
   const dispatch = useDispatch();
 
   const [selected, setSelected] = React.useState([]);
@@ -59,7 +59,11 @@ const AllOrders = (props) => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
   // console.log(props.orders.orders);
@@ -229,8 +233,14 @@ const AllOrders = (props) => {
                               <IconButton
                                 aria-label="Delete"
                                 className={classes.deleteicon}
-                                onClick={() =>
+                                onClick={() =>{
+                                  if (
+                                    window.confirm(
+                                      "Are you sure you want to delete selected items from database?"
+                                    )
+                                  )
                                   props.orderDeleteAction(order.id)
+                                }
                                 }
                               >
                                 <DeleteIcon />
@@ -243,7 +253,7 @@ const AllOrders = (props) => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 500, "all"]}
                 component="div"
                 count={props.orders.orders.length}
                 rowsPerPage={rowsPerPage}

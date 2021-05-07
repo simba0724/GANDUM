@@ -13,9 +13,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.MuiTypography-h1, .MuiTypography-root, .MuiTab-wrapper, .MuiButton-label, .MuiButtonBase-root{
+  font-family: 'Josefin Sans', sans-serif !important;
+}
 body {
   overflow-x: hidden;
-  font-family: Josefin-Sans !important;
+  font-family: 'Josefin Sans', sans-serif !important;
   font-weight: 600 !important;
   line-height: 28px;
   letter-spacing: -0.06px;
@@ -41,7 +44,7 @@ header {
   height: 50px;
   display: flex;
   align-items: center;
-  font-family: Josefin-Sans !important;
+  font-family: 'Josefin Sans', sans-serif !important;
   font-weight: 520 !important;
   line-height: 28px;
   letter-spacing: -0.06px;
@@ -282,7 +285,7 @@ section:nth-child(even) {
 }
 
 .header-font {
-  font-family: Josefin-Sans !important;
+  font-family: 'Josefin Sans', sans-serif !important;
   font-weight: 600 !important;
   line-height: 28px;
   letter-spacing: -0.06px;
@@ -291,7 +294,7 @@ section:nth-child(even) {
 .color-footer,
 .footer-upper {
   /* font-size: 24px; */
-  font-family: Josefin-Sans !important;
+  font-family: 'Josefin Sans', sans-serif !important;
   font-weight: 500 !important;
   line-height: 28px;
   letter-spacing: -0.06px;

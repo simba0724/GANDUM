@@ -179,8 +179,18 @@ export const update = (
 
     .then((res) => {
       if (res.data) {
-        Auth.logout();
-        window.location.href = "/login";
+        // Auth.logout();
+        let user = Auth.getUser();
+        user = {
+          ...user,
+          first_name: firstName,
+          name: firstName,
+          last_name: lastName,
+          email: email,
+          phone: phone,
+        };
+        Auth.setUserToken(user)
+        window.location.href = "/account/profile";
         window.toast("Profile is succefully updated.");
         return res;
       }

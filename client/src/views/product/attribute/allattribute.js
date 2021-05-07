@@ -33,13 +33,17 @@ const AllAttribute = () => {
   const dispatch = useDispatch();
   const attributeState = useSelector((state) => state.product_attributes);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(100);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    if(event.target.value === "all"){
+      setRowsPerPage(+99999);
+    } else {
+      setRowsPerPage(+event.target.value);
+    }
     setPage(0);
   };
 
@@ -116,9 +120,14 @@ const AllAttribute = () => {
                             <Tooltip
                               title="Delete"
                               aria-label="delete"
-                              onClick={() =>
+                              onClick={() =>{
+                                if (
+                                  window.confirm(
+                                    "Are you sure you want to delete this attribute?"
+                                  )
+                                )
                                 dispatch(attributeDeleteAction(attribute.id))
-                              }
+                              }}
                             >
                               <IconButton
                                 aria-label="Delete"
@@ -134,7 +143,7 @@ const AllAttribute = () => {
                 </Table>
               </TableContainer>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 20]}
+                rowsPerPageOptions={[100, 200, 500, "all"]}
                 component="div"
                 count={attributeState.attributes.length}
                 rowsPerPage={rowsPerPage}

@@ -138,6 +138,9 @@ module.exports = {
         }
 
         delete args.id;
+        if(customer.address_book.length == 0) {
+          args.default_address = true; 
+        }
         customer.address_book.push(args);
         customer.updated = Date.now();
 
@@ -174,7 +177,7 @@ module.exports = {
           }
           return address;
         });
-
+console.log(customer.address_book)
         customer.updated = Date.now();
         await customer.save();
         return await Customer.find({});

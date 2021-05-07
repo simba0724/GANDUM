@@ -51,7 +51,7 @@ const Header = (props) => {
   return (
     <Fragment>
       <header
-        style={{ backgroundColor: "rgb(245, 222, 179)", height: 60, paddingTop: 15, "fontFamily": "font-family: Josefin Sans, sans-serif !important" }}
+        style={{ backgroundColor: "rgb(245, 222, 179)", height: 60, paddingTop: 15, "fontFamily": "Josefin Sans, sans-serif !important" }}
       >
         <ToastContainer autoClose={3000} hideProgressBar />
         <Container>

@@ -65,18 +65,25 @@ const BillingForm = (props) => {
     var user_id = Auth.getUserId();
     props.getUserOrdersAction(user_id);
     console.log(props.orders);
+
+    let address = user.address.filter(u => u.default_address == true);
+
+    if(user.address.length > 0) {
+      billingInfoObject.address_line_1 = address[0].address_line1;
+      billingInfoObject.address_line_2 = address[0].address_line2;
+      billingInfoObject.company = address[0].company;
+    }
+
     if(props.orders !== null){
       if(props.orders.length > 0){
         billingInfoObject.firstname = props.orders[0].billing.firstname;
         billingInfoObject.lastname = props.orders[0].billing.lastname;
         billingInfoObject.email = props.orders[0].billing.email;
         billingInfoObject.phone = props.orders[0].billing.phone;
-        billingInfoObject.company = props.orders[0].billing.company;
         billingInfoObject.country = props.orders[0].billing.country;
         billingInfoObject.status = props.orders[0].billing.status;
         billingInfoObject.city = props.orders[0].billing.city;
-        billingInfoObject.address_line_1 = props.orders[0].shipping.address_line_1;
-        billingInfoObject.address_line_2 = props.orders[0].shipping.address_line_2;
+        
       }
     }
     var allData = {
